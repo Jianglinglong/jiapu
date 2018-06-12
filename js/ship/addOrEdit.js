@@ -68,6 +68,7 @@ function showBox(type, user) {
 }
 window.addEventListener("popstate", function () {
     if (sessionStorage.getItem("reload")){
+        sessionStorage.removeItem("reload");
         window.location.reload();
     }else {
         showJiapu()
