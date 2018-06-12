@@ -7,6 +7,8 @@ function addSomme(user, parent,direct) {
     $("input[type=text]").val("");
 	$("input[type=file]").val("");
     $("input[type=radio]").removeAttr('checked');
+    $("input[name=sex][value=男]").prop("checked", "checked");
+    $("input[name=survivalMode][value=活]").prop("checked", "checked");
     submitBtnClick("/api/pedigreePerson/add", parent, user.id, true,direct);
 }
 
@@ -40,7 +42,7 @@ function initUserInfo(user) {
 }
 
 function showJiapu() {
-    $("input[type=submit]").unbind();
+    $("#submit").unbind();
     $(".show-canvas-content").show();
     $("#edit").hide();
     if (dtpicker && dtpicker.dispose) {
@@ -65,7 +67,11 @@ function showBox(type, user) {
     initEditBox(user)
 }
 window.addEventListener("popstate", function () {
-    showJiapu()
+    if (sessionStorage.getItem("reload")){
+        window.location.reload();
+    }else {
+        showJiapu()
+    }
 });
 
 function editSomeOne(user, parent) {
@@ -80,7 +86,11 @@ function editSomeOne(user, parent) {
 function submitBtnClick(api, parent, own, type,direct) {
     $("input").removeAttr("disabled");
     $(".mui-bar").show();
-    $("input[type=submit]").click(function () {
+    $("#submit").click(function () {
+        mui(this).button('loading');
+        setTimeout(function() {
+            mui(this).button('reset');
+        }.bind(this), 2000);
         var info = {};
         var inputs = $("input[type=text]");
         for (var i = 0; i < inputs.length; i++) {
@@ -110,13 +120,11 @@ function submitBtnClick(api, parent, own, type,direct) {
             info.pedigreePersonId = own;
         }
         info.pedigreeId = pedigreeId;
-        console.log(info)
         postDataToServer(api, JSON.stringify(info), function (res) {
             if (res.code == "SUCCESS") {
-                showJiapu()
-                alert("保存成功")
+                alert("保存成功");
+                sessionStorage.setItem("reload","reload")
                 history.back();
-                window.location.reload()
             } else if(res.code == "PleaseLogin") {
                 location.href = "login.html"
             }else {

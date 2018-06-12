@@ -16,6 +16,9 @@ $(window).scroll(function () {
 function defaultImgUrl(obj) {
     obj.src = defaultImg;
 }
+function goJiapu(id) {
+    window.location.href = "editship.html?pedigreeId="+id;
+}
 function loadMore() {
     getDataFromServer("/api/pedigree/myJoinlist", {currentPage: page, limit: 20,content:$("input[type=search]").val()}, function (res) {
         if (res.code == "SUCCESS") {
@@ -23,7 +26,7 @@ function loadMore() {
             if (list && list.length > 0) {
                 var record = "";
                 for (let item of list) {
-                    record += '<li class="mui-table-view-cell mui-media">' +
+                    record += '<li class="mui-table-view-cell mui-media" onclick="goJiapu('+item.pedigreeId+')">' +
                         '<img onerror="defaultImgUrl(this)" class="mui-media-object mui-pull-left" src="' +imgBase+ item.totem + '">' +
                         '<div class="mui-media-body">' + item.nickname +
                         '<p>' + item.nickname + '</p>' +

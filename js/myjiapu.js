@@ -1,11 +1,31 @@
 getDataFromServer("/api/pedigree/myPedigreeUserInfo",null,function (res) {
     if (res.code == "SUCCESS") {
         let user = res.result;
-        $("img").attr("src", imgBase+ user.headImg);
         if (user) {
+            $("img").attr("src", imgBase+ user.headImg);
             localStorage.setItem(user.userId+"jiapuInfo",JSON.stringify(user));
+            getDataFromServer("/api/pedigree/myPedigreeInfo",null,function (res) {
+                if (res.code == "SUCCESS"){
+                    let jiapu = res.result;
+                    if (jiapu) {
+                        $("#submit").val("编辑家谱");
+                        $("#submit").click(function () {
+                            window.location.href = "editship.html?pedigreeId="+jiapu.pedigreeId;
+                        })
+                    }else {
+                        $("#submit").click(function () {
+                            var user = JSON.parse(localStorage.getItem("userInfo"));
+                            window.location.href = "chuangjianjiapu.html"
+                        })
+                    }
+                }
+            },function (error) {
+                alert(error);
+            });
         }else {
-            alert("请先完善个人信息");
+            $("#submit").click(function () {
+                alert("请先完善个人信息");
+            })
         }
     }else{
         window.location.href="login.html"
@@ -14,24 +34,6 @@ getDataFromServer("/api/pedigree/myPedigreeUserInfo",null,function (res) {
     alert(error);
 });
 
-getDataFromServer("/api/pedigree/myPedigreeInfo",null,function (res) {
-    if (res.code == "SUCCESS"){
-        let jiapu = res.result;
-        if (jiapu) {
-            $("#submit").val("编辑家谱");
-            $("#submit").click(function () {
-                localStorage.getItem("userInfo")
-                window.location.href = "editship.html?pedigreeId="+jiapu.pedigreeId;
-            })
-        }else {
-            $("#submit").click(function () {
-                window.location.href = "chuangjianjiapu.html"
-            })
-        }
-    }
-},function (error) {
-    alert(error);
-});
 function jiapuInfo(id){
     window.location.href = "editship.html?pedigreeId="+id;
 }

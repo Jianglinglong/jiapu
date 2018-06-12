@@ -80,3 +80,4 @@
  .popup_menu a{ display:block; color:#325B8E; text-indent:12px; text-decoration:none; height:26px; line-height:25px; padding-right:5px;}
  .popup_menu a:hover{ background:#57B4E4; color:#fff; border-radius:5px;}
  .show-canvas-content{overflow: scroll;width: 100%}
+  .mui-bar .mui-btn{top: 0}
