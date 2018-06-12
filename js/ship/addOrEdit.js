@@ -74,7 +74,7 @@ function editSomeOne(user, parent) {
     }
 }
 
-function submitBtnClick(api, parent, own, type) {
+function submitBtnClick(api, parent, own, type,direct) {
     $("input").removeAttr("disabled");
     $(".mui-bar").show();
     $("input[type=submit]").click(function () {
@@ -102,10 +102,7 @@ function submitBtnClick(api, parent, own, type) {
         /*添加或编辑*/
         if (type) {
             info.chouseId = own;
-            if (!info.createType) {
-                alert("选择添加方向");
-                return;
-            }
+            info.createType = direct
         } else {
             info.pedigreePersonId = own;
         }

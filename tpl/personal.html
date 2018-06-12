@@ -23,7 +23,7 @@
 </header>-->
 <div class="mui-content">
   	
-     <div class="mybanner"><img id="headImg" src="../img/demo.jpg"/><h4 id="nickname"></h4></div>  
+     <div class="mybanner"><img id="headImg" src="../img/demo.jpg" alt="头像"/><h4 id="nickname"></h4></div>
  
 	 <div class="yunbi">
 	 	<div class="ybyue">
@@ -136,6 +136,10 @@
             alert("提交数据失败！");
         }
     });
+
+    $("#headImg").on("error",function (e) {
+        $(this).attr("src","http://img.yunji128.com/homage/upload/n2n/h5/userhead/2018/06/cd19f659-68c.jpg")
+    })
 </script>
 </body>
 </html>

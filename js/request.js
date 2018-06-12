@@ -1,6 +1,6 @@
 var urlBase = 'http://api.yunji128.com/homage';
 var imgBase = 'http://img.yunji128.com/';
-
+var defaultImg = "http://img.yunji128.com/homage/upload/n2n/h5/userhead/2018/06/cd19f659-68c.jpg";
 function getDataFromServer(api, data, success, error,async) {
     $.ajax({
         headers: {

@@ -53,6 +53,9 @@ $(window).scroll(function () {
         loadMore();
     }
 });
+function defaultImgUrl(obj) {
+    obj.src = defaultImg;
+}
 function loadMore() {
     getDataFromServer("/api/pedigree/list", {currentPage: page, limit: 20,content:$("input[type=search]").val()}, function (res) {
         if (res.code == "SUCCESS") {
@@ -61,7 +64,7 @@ function loadMore() {
                 var record = "";
                 for (let item of list) {
                     record += '<li class="mui-table-view-cell mui-media">' +
-                        '<img class="mui-media-object mui-pull-left" src="' + item.totem + '">' +
+                        '<img onerror="defaultImgUrl(this)"  class="mui-media-object mui-pull-left" src="' +imgBase+ item.totem + '">' +
                         '<div class="mui-media-body">' + item.nickname +
                         '<p>' + item.nickname + '</p>' +
                         '<p class="time">' + item.rowAddTime + '</p>' +

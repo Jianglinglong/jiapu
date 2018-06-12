@@ -290,7 +290,7 @@ WY.genealogy = function (options) {
             this.ele.html('');
             var data = this.data;
             if (!data.pId && belong) {
-                this.ele.append('<div  class="fz-12"><span class="cursor-pointer inline-block pr-5 add-item-btn">新增</span></div>');
+                this.ele.append('<div  class="fz-12"><span class="cursor-pointer inline-block pr-5 add-item-btn" rel="up">新增</span></div>');
             }
             this.ele.append('<div class="fz-16"><div class="btn btn-small ' + (data.survivalMode == '活' ?
                     'btn-primary' : '') + '">' +
@@ -303,7 +303,7 @@ WY.genealogy = function (options) {
             if (belong) {
                 this.ele.append('<div class="fz-12">' +
                     '<span class=" cursor-pointer inline-block pr-5 edit-item-btn">编辑</span>' +
-                    '<span class="cursor-pointer inline-block pr-5 add-item-btn">新增</span>' +
+                    '<span class="cursor-pointer inline-block pr-5 add-item-btn" rel="down">新增</span>' +
                     ((data.patId == null || data.flagCreator == true) ? '' : '<span class="cursor-pointer inline-block del-item-btn">删除</span>') +
                     '</div>');
             }
@@ -366,26 +366,12 @@ WY.genealogy = function (options) {
         return !a.pId;
     }).pop();
     var parentId = parentObj && parentObj.genealogyPersonId;
-    //新增
-    function add() {
-        var _parentObj = item.getByParentId(editId);
-
-        addSomme(_parentObj, editId);
-    }
     var isParent;
-    options.addBtn.click(function () {
-        editId = '';
-        isParent = 1;
-        add();
-    });
     $content.on("click", '.add-item-btn', function (e) {
         e.stopPropagation();
-        //         editId = $(this).closest('[code]').attr('code');
-        //         isParent = 0;
-        //         add();
         editId = $(this).closest('[code]').attr('code');
         var itemObj = item.getById(editId);
-        addSomme(itemObj, itemObj.getParent(), editId)
+        addSomme(itemObj, itemObj.getParent(), $(this).attr("rel"))
     });
     //删除
     $content.on("click", '.del-item-btn', function (e) {
@@ -492,6 +478,7 @@ WY.genealogy = function (options) {
         ctx.clearRect(0, 0, canvasWidth, canvasHeight);
         setHeight(options.stepWidth * allGeneration);
         setWidth(options.stepWidth * allGeneration * 10);
+        $(".show-canvas-content").height($(window).height());
         ctx.strokeStyle = options.stepLineColor;
         for (var i = 1; i <= allGeneration; i++) {
             var str = i;
