@@ -84,17 +84,7 @@ $(function () {
                     }
                 }
             }
-            var p = getItemById(null);
-            if(p){
-                WY.genealogy({
-                    canvas: $('.show-genealogy-canvas')[0],
-                    dataList: p.children,
-                    content: $showContent.children(),
-                    addBtn: $(),
-                    search: search,
-                    belong:belong
-                })
-            }
+            loadData=true;
         },
         async:false
     });
@@ -104,6 +94,12 @@ $(function () {
         params:{pedigreeId:pedigreeId},
         success:function (res) {
             belong = user.userId ==  res.result.userId;
+            loadBelong = true;
+        },
+        async:false
+    });
+    var count = setInterval(function () {
+        if (loadBelong && loadData) {
             var p = getItemById(null);
             if(p){
                 WY.genealogy({
@@ -115,10 +111,13 @@ $(function () {
                     belong:belong
                 })
             }
-        },
-        async:false
-    })
+            clearInterval(count);
+        }
+    });
 });
+
+var loadBelong =false;
+var loadData = false;
 var tatolNodes = [];
 var pedigreeId;
 var belong = false;

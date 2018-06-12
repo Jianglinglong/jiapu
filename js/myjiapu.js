@@ -4,9 +4,6 @@ getDataFromServer("/api/pedigree/myPedigreeUserInfo",null,function (res) {
         $("img").attr("src", imgBase+ user.headImg);
         if (user) {
             localStorage.setItem(user.userId+"jiapuInfo",JSON.stringify(user));
-            $("#submit").click(function () {
-                window.location.href = "chuangjianjiapu.html"
-            })
         }else {
             alert("请先完善个人信息");
         }
@@ -25,6 +22,10 @@ getDataFromServer("/api/pedigree/myPedigreeInfo",null,function (res) {
             $("#submit").click(function () {
                 localStorage.getItem("userInfo")
                 window.location.href = "editship.html?pedigreeId="+jiapu.pedigreeId;
+            })
+        }else {
+            $("#submit").click(function () {
+                window.location.href = "chuangjianjiapu.html"
             })
         }
     }

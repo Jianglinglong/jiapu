@@ -28,8 +28,11 @@ function initUserInfo(user) {
         } else if (type == "radio") {
             $("input[name=" + item + "][value='" + user[item] + "']").prop("checked", "checked");
         }
-        if (item == "headImg" || item == "spouseHeadImg") {
-            input.prev().attr("src", imgBase+ user[item].replace(imgBase,""))
+        if (item == "headImg") {
+            input.prev().attr("src", user[item] ? imgBase+ user[item].replace(imgBase,"") :"../img/boy.jpg")
+        }
+        if (item == "spouseHeadImg") {
+            input.prev().attr("src", user[item] ? imgBase+ user[item].replace(imgBase,"") :"../img/girl.jpg")
         }
     }
     $("#cityResult2").val(user.xjProvince + " " + user.xjCity + " " + user.xjCounty);
@@ -106,10 +109,6 @@ function submitBtnClick(api, parent, own, type,direct) {
         } else {
             info.pedigreePersonId = own;
         }
-        /*添加方向*/
-        if (!parent) {
-            info.createType = "up"
-        }
         info.pedigreeId = pedigreeId;
         console.log(info)
         postDataToServer(api, JSON.stringify(info), function (res) {
@@ -117,7 +116,7 @@ function submitBtnClick(api, parent, own, type,direct) {
                 showJiapu()
                 alert("保存成功")
                 history.back();
-                location.reload()
+                window.location.reload()
             } else if(res.code == "PleaseLogin") {
                 location.href = "login.html"
             }else {
