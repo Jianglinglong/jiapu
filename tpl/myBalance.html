@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>个人中心</title>
+    <script src="../js/mui.min.js?version=1.0"></script>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+     <link href="../css/index.css" rel="stylesheet"/>
+      <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js?version=1.0"></script>
+     <script src="../js/jquery-1.10.2.js?version=1.0"></script>
+     <script src="../js/showmessage.js?version=1.0"></script>
+    
+   <style type="text/css">
+   	.mybanner {
+	background: #1ab8ed;
+	width: 100%;
+	height: 140px;
+	/*margin-top: -10px;*/
+	position: relative;
+	}
+
+	.mybanner .bannertext{
+		width: 50%;		
+		position: absolute;
+		top: 40px;
+		left: 26%;
+	}
+	.mybanner .bannertext h4{
+		color: #FFFFFF;
+		
+	}
+	.mybanner .yaoqing{
+		text-align: center;
+		color: #FFFFFF;
+		width: 88px;
+		height: 40px;
+		line-height: 40px;
+		position: absolute;
+		left: 38%;
+		top:  56%;
+		border: 1px #F2F2F2 solid;
+		border-radius: 6px;
+	}
+	.tixian h4 {
+		font-size: 16px;
+		color: #4a4a4a;
+		height:40px;
+		line-height: 40px;
+		/*border: 1px red solid;*/
+		margin-left: 4%;
+	}
+	.tixian h4 .txbtn{
+		/*border: 1px red solid;*/		
+		margin-left: 34%;
+	}
+	
+	
+
+    *{margin:0;padding:0;}
+ul,ol li{list-style:none;}
+/*苹方-简 纤细体*/
+.font-slin{font-family: PingFangSC-Thin, sans-serif;}
+.RedCoupon_header{width:100%;background: -webkit-linear-gradient(bottom, #ff3f48, #ef7245);}
+.RedCoupon_header_bz{padding:0.22rem 0.3rem;overflow:hidden;text-align:center; }
+.RedCoupon_header_bz a{float:right;display:block;width:22px;height:22px;text-align:center;line-height:22px;border-radius:50%;font-size:14px;font-weight:bold;display:flex;}
+.RedCoupon_header_num{text-align:center;color:#fff;}
+.RedCoupon_header_num p{font-size:0.3rem;}
+.RedCoupon_header_num h1{font-weight:normal;font-size:0.9rem;margin: 0.4rem 0;}
+.RedCoupon_header_zq{width:100%;margin-top:0.2rem;text-align:center;padding-bottom:0.7rem;}
+.RedCoupon_header_zq p{color:#fdd1ce;font-size:0.24rem;margin-bottom: 0.3rem;}
+.RedCoupon_header_zq a{font-size:0.28;padding:0rem 0.72rem;height:36px; border-radius:18px;border:1px solid #fdaba9;display:inline-block;line-height:36px;color:#fff;}
+.RedCoupon_nav{padding:0.32rem 0;overflow:hidden;background:#fff;}
+.RedCoupon_nav_item{width:49%;border-right:1px solid #f2f2f2;float:left;text-align:center;}
+.RedCoupon_nav_item p{margin:0px;color:#999;font-size: 0.26rem;}
+.RedCoupon_nav_item h3{margin:0px;color:#333;font-size:0.36rem;padding-top:0.1rem;font-weight: normal;}
+.RedCoupon_nav_item:last-child{border:none;}
+.RedCoupon_detail{margin-top: 0.2rem;background: #fff;overflow: hidden;}
+.RedCoupon_detail_title{width:100%;padding:0.2rem; font-size:14px;color:#333;border-bottom:1px solid #f2f2f2;box-sizing:border-box;}
+.RedCoupon_detail_title img{width:0.34rem;margin-right:4px;}
+.RedCoupon_detail_list {width:100%}
+.RedCoupon_detail_item{padding:0.24rem 0.2rem;box-sizing:border-box;float:left;border-bottom:1px solid #f2f2f2;width:100%;}
+.RedCoupon_detail_item_left{width:75%;float:left;}
+.RedCoupon_detail_item_name{width:100%;color:#000;font-size:14px;}
+.RedCoupon_detail_item_time{font-size:12px;color:#999;display:block;}
+.RedCoupon_detail_item_right{width:25%;float:right;overflow:hidden;text-align:right;}
+
+	.tiApply  
+    {  
+        display:none;  
+        border:1px solid #BCE8F1;  
+        height:46%;  
+        width:100%;  
+        position:absolute;/*让节点脱离文档流,我的理解就是,从页面上浮出来,不再按照文档其它内容布局*/  
+        top:30%;/*节点脱离了文档流,如果设置位置需要用top和left,right,bottom定位*/  
+        left:0%;  
+        z-index:2;/*个人理解为层级关系,由于这个节点要在顶部显示,所以这个值比其余节点的都大*/  
+        background: white;  
+        padding: 12px;
+    }  
+    .tiApply h5{
+    	text-align: center;
+    	padding-bottom: 12px;
+    	font-size: 14px;
+    	/*border: 1px red solid;*/
+    }
+    .tiApply .btn1{
+    	background: rgb(52,178,234);
+    	border-radius: 4px;
+    	color: #FFFFFF;
+    	margin-left:20px;
+    	border: none;
+    }
+    .tiApply td{
+    	font-size:12px;    	
+    	text-align: right;
+    	/*border: 1px red solid;*/
+    }
+    .tiApply table{
+    	/*border: 1px red solid;*/
+    	
+    }
+ .over  
+    {  
+        width: 100%;  
+        height: 100%;  
+        opacity:0.8;/*设置背景色透明度,1为完全不透明,IE需要使用filter:alpha(opacity=80);*/  
+        filter:alpha(opacity=80);  
+        display: none;  
+        position:absolute;  
+        top:0;  
+        left:0;  
+        z-index:1;  
+        background: silver;  
+    }  
+    
+  .bg {
+	width:100%;
+	height:100%;
+	z-index:9;	
+	position:absolute;
+	top: 40px;
+	background:rgba(0,0,0,.8);
+	display:none;
+	/*border:10px solid #555352;*/
+	
+}
+    .fxYingDao{    	
+    position:absolute;
+    top: 40px;
+	z-index:99;    	
+	display:none;	
+    }
+    .fxYingDao img{
+    	width: 90%;
+    	margin-left: 5%;
+    	
+    }
+ 
+   </style>
+</head>
+<body>
+
+<header class="mui-bar mui-bar-nav header">
+		    <a id="mback" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">我的余额</h1>
+</header>
+<div class="mui-content">
+     <div class="mybanner">
+     	<div class="bannertext"><h4>余额不够用？<span>马上</span></h4></div>
+     	<div id="yaoqing" class="yaoqing">邀请赚取</div>
+     </div>  
+
+ 	<div class="tixian"><h4>可提现余额：<span id="canUseMoney"></span><a onclick="tixian()" class="txbtn">申请提现</a></h4></div>
+	<ul class="RedCoupon_detail_list">
+		<li class="RedCoupon_detail_item">
+			<div class="RedCoupon_detail_item_left">
+				<p class="RedCoupon_detail_item_name"></p><span class="RedCoupon_detail_item_time"></span></div><div class="RedCoupon_detail_item_right">
+			</div>
+		</li>
+	</ul>
+    <div style="text-align: center;line-height: 28px; margin:14px 0; color: #999; font-size: 12px; display: none" id="notenymore">亲！没有更多了
+</div>
+
+<div class="bg"></div>
+<div class="fxYingDao"><img src="../img/WX_fx.png"/></div>
+ 
+<div class="tiApply" style="display:none" >
+	<h5>请输入您的身份信息</h5>
+    <table>
+    	    	<tr>
+    		<td style="width: 26%;">提现金额：</td>
+    		<td><input type="number" id="applyMoney" value=""></td>
+    	</tr>
+    	<tr>
+    		<td style="width: 26%;">支付宝账号：</td>
+    		<td><input type="text" id="cardNumber" value=""></td>
+    	</tr>
+    	<tr>
+    		<td style="width: 26%;">持有人：</td>
+    		<td><input type="text" id="realName" value=""></td>
+    	</tr>
+    	<tr>
+    		<td></td>
+    		<td>
+    			<input class="btn1" type="button" onclick="$('.tiApply').hide();$('.over').hide()" value="取消">
+    			<input class="btn1" style="float: right;" type="button" onclick="subApply();" value="提交申请">
+    		</td>
+    	</tr>
+    </table>
+</div>
+<div class="over"></div>  
+
+ <script type="application/javascript">
+ 	$("#yaoqing").on("tap",function(){
+// 		alert("弹出层分享引导");
+ 		$(".bg, .fxYingDao").show();
+ 	});
+ 	$(".header").on("tap",function(){
+ 			$(".bg, .fxYingDao").hide();
+ 	})
+ 	var urlBase = 'http://api.yunji128.com/homage';
+	$.ajax({  
+        type: "GET",  
+        headers: {
+	        tokenInfo: window.localStorage.getItem("tokenInfo")
+	    },
+        url: urlBase + '/api/userBalance/balance',  
+        data: {},
+        dataType: "json",  
+        success: function (data) {
+            $("#canUseMoney").html((data.result/100.0).toFixed(2));
+        }
+    });
+    
+    var pageNum = 1;
+    var pageSize = 20;
+    var islast = false;
+    var isLoad = true;
+    $(window).scroll(function () {
+        if (isLoad || islast) {
+            return;
+        }
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if ((scrollTop + windowHeight == scrollHeight) && !islast) {
+            isLoad = true;
+            loadHistory();
+        }
+    });
+    var loadHistory = function () {
+        if (islast || isLoad == false) {
+            return;
+        }
+        $.ajax({  
+            type: "GET",  
+            headers: {
+		        tokenInfo: window.localStorage.getItem("tokenInfo")
+		    },
+            url: urlBase + '/api/userBalance/list',  
+            data: {currentPage: pageNum, limit: pageSize},
+            dataType: "json",  
+            success: function (data) {
+	            islast = data.result.lastPage;
+	            pageNum++;
+	            var list = data.result.content;
+	            var context = '';
+	            for (var i = 0; i < list.length; i++) {
+	                //context += "<div class='phone'><a href='#'>"+list[i].dic+"</a><span>"+ ((list[i].number / 100).toFixed(2)) +"</span><h5 class='times'>"+list[i].rowAddTime+"</h5></div>";
+	            	context += "<li class='RedCoupon_detail_item' ><div class='RedCoupon_detail_item_left'><p class='RedCoupon_detail_item_name' >";
+	                context += list[i].dic + "</p><span class='RedCoupon_detail_item_time'>";
+	                context += list[i].rowAddTime;
+	                context += "</span></div><div class='RedCoupon_detail_item_right'>" + ((list[i].number / 100).toFixed(2)) + "</div></li>";
+	            }
+	            setTimeout(function () {
+	                if (islast){
+	                    $("#notenymore").css("display", "block");
+	                }
+	                $(".RedCoupon_detail_list").append(context);
+	                isLoad = false;
+	            }, 10);
+	        }
+        });
+    };
+    loadHistory();
+   
+   function tixian(){
+	   $(".tiApply").show();
+	   $(".over").show();
+   }
+   function subApply(){
+   		var requestBody = {
+   			money : $("#applyMoney").val(),
+   			realName : $("#realName").val(),
+   			cardNumber : $("#cardNumber").val()
+   		}
+   		$.ajax({  
+            type: "POST",  
+            headers: {
+		        tokenInfo: window.localStorage.getItem("tokenInfo")
+		    },
+            url: urlBase + '/api/userBalance/applyWithdraw',  
+            contentType: "application/json; charset=utf-8",  
+	        data: JSON.stringify(requestBody),  
+            dataType: "json",  
+            success: function (data) {
+	            if(data.code=='SUCCESS'){
+	               	alert("提交申请成功，我们将在3-7个工作日完成打款");
+	                window.location.reload();
+	            }
+	            else{
+	                showMessage(data.message);
+	            }
+	        }
+        });
+   }
+ 
+ 	$(document).ready(function(){
+ 		var userInfo = window.localStorage.getItem("userInfo");
+ 		if(null == userInfo){
+ 			showMessage("请先登录");
+ 			//location.href="login.html";
+ 		}
+ 		var shareUserId = JSON.parse(userInfo).userId;
+ 		if(null == shareUserId){
+ 			showMessage("请先登录");
+ 			///location.href="login.html";
+ 		}
+        initPage(shareUserId);
+    });
+    function initPage(shareUserId) {
+    	/***用于获得当前连接url用**/
+        //alert(window.location.href);
+        /***用户点击分享到微信圈后加载接口接口*******/
+        $.get(urlBase + "/api/wexin_mp/v_1/config",{"url":window.location.href},function(data,status){
+            console.log(data.appId+" "+data.timestamp+" "+data.nonceStr+" "+data.signature);
+            wx.config({
+                debug: false,
+                appId: data.appId,
+                timestamp:data.timestamp,
+                nonceStr:data.nonceStr,
+                signature:data.signature,
+                jsApiList: [
+                    'checkJsApi',
+                    'onMenuShareAppMessage',
+                    'onMenuShareTimeline',
+                    'onMenuShareQQ',
+                    'hideOptionMenu',
+                ]
+            });
+            var shareTitle = "一起分享吧！";
+            var desc = "分享描述";
+            var shareImg = "http://img.yunji128.com/homage/upload/sacrifice/2018/06/75ca75abf4864918b70794d2390d43cc.png";
+            var link = "http://wx.yunji128.com/tpl/share.html?shareUserId="+shareUserId;
+            
+            wx.ready(function(){
+            	 /*分享给朋友*/  
+		        wx.onMenuShareAppMessage({  
+		            title: shareTitle, // 分享标题  
+		            desc: desc, // 分享描述  
+		            link: link, // 分享链接  
+		            imgUrl: shareImg, // 分享图标  
+		            type: 'link', // 分享类型,music、video或link，不填默认为link  
+		            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空  
+		            success: function () {   
+		                showMessage("您已分享");  
+		            },  
+		            cancel: function () {   
+		                showMessage('您已取消分享');  
+		            }  
+		        });
+                wx.onMenuShareTimeline({
+                    title : shareTitle, // 分享标题
+                    link : link, // 分享链接
+                    imgUrl : shareImg, // 分享图标
+                    success : function() {
+                        showMessage("分享成功");
+                    },
+                    cancel : function() {
+                        showMessage("分享取消");
+                    }
+                });
+                wx.onMenuShareQQ({  
+		            title: shareTitle, // 分享标题  
+		            desc: desc, // 分享描述  
+		            link: link, // 分享链接  
+		            imgUrl: shareImg, // 分享图标  
+		            success: function () {   
+		               showMessage("分享成功");
+		            },  
+		            cancel: function () {   
+		              showMessage("分享取消");
+		            }  
+		        });  
+                
+                //wx.hideOptionMenu();/***隐藏分享菜单****/
+            });
+        });
+    }
+ </script>
+</body>
+</html>
