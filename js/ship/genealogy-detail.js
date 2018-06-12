@@ -336,7 +336,8 @@ WY.genealogy = function (options) {
             });
         });
     }
-    $content.on("click",".btn",function () {
+    $content.on("click",".btn",function (e) {
+        e.stopPropagation();
         var itemClick = $(this).closest("[code]");
         editId = itemClick.attr("code");
         let obj = item.getById(editId);
@@ -354,7 +355,8 @@ WY.genealogy = function (options) {
     });
 
     //编辑
-    $content.on('click', '.edit-item-btn', function () {
+    $content.on("click", '.edit-item-btn', function (e) {
+        e.stopPropagation();
         editId = $(this).closest('[code]').attr('code');
         var itemObj = item.getById(editId);
         editSomeOne(itemObj, itemObj.getParent(), editId)
@@ -376,7 +378,8 @@ WY.genealogy = function (options) {
         isParent = 1;
         add();
     });
-    $content.on('click', '.add-item-btn', function () {
+    $content.on("click", '.add-item-btn', function (e) {
+        e.stopPropagation();
         //         editId = $(this).closest('[code]').attr('code');
         //         isParent = 0;
         //         add();
@@ -385,7 +388,8 @@ WY.genealogy = function (options) {
         addSomme(itemObj, itemObj.getParent(), editId)
     });
     //删除
-    $content.on('click', '.del-item-btn', function () {
+    $content.on("click", '.del-item-btn', function (e) {
+        e.stopPropagation();
         editId = $(this).closest('[code]').attr('code');
         var btnArray = ['否', '是'];
         mui.confirm('确定删除此成员及后代？', '删除', btnArray, function (e) {
@@ -581,7 +585,7 @@ kyoPopupMenu = (function(){
         id:null
     }})();
 //取消右键
-$('.show-canvas-content').on('tap', function (){return false;}).click(function(){
+$('.show-canvas-content').on('click', function (){return false;}).click(function(){
     kyoPopupMenu.user=null;
     kyoPopupMenu.id=null;
     $('.popup_menu').hide();

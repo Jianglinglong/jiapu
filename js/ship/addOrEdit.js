@@ -2,11 +2,11 @@ function addSomme(user, parent,direct) {
     $(".mui-control-content").removeClass("mui-active").eq(0).addClass("mui-active");
     history.pushState("", document.title, "#add")
     showBox(true)
+    $("#img").attr("src","../img/boy.jpg");
+    $("#another").attr("src","../img/girl.jpg");
     $("input[type=text]").val("");
 	$("input[type=file]").val("");
     $("input[type=radio]").removeAttr('checked');
-    $("#img").removeAttr("src");
-    $("#another").removeAttr("src");
     submitBtnClick("/api/pedigreePerson/add", parent, user.id, true,direct);
 }
 
@@ -37,9 +37,7 @@ function initUserInfo(user) {
 }
 
 function showJiapu() {
-    $("input[type=submit]").unbind("click")
-    $("#another").unbind("click")
-    $("#img").unbind("click")
+    $("input[type=submit]").unbind();
     $(".show-canvas-content").show();
     $("#edit").hide();
     if (dtpicker && dtpicker.dispose) {
@@ -137,9 +135,11 @@ function submitBtnClick(api, parent, own, type) {
 
 
 function upload(img, file, form) {
+    img.unbind()
     img.click(function () {
         file.click()
     });
+    file.unbind("change")
     file.change(function () {
         var fileSize = $(this)[0].files[0].size;
         console.log(fileSize)

@@ -7,6 +7,8 @@ getDataFromServer("/api/pedigree/myPedigreeUserInfo",null,function (res) {
             $("#submit").click(function () {
                 window.location.href = "chuangjianjiapu.html"
             })
+        }else {
+            alert("请先完善个人信息");
         }
     }else{
         window.location.href="login.html"
@@ -32,6 +34,9 @@ getDataFromServer("/api/pedigree/myPedigreeInfo",null,function (res) {
 function jiapuInfo(id){
     window.location.href = "editship.html?pedigreeId="+id;
 }
+function more(){
+    window.location.href = "more.html";
+}
 getDataFromServer("/api/pedigree/myJoinlist",{currentPage:1,limit:2},function (res) {
     if (res.code == "SUCCESS") {
         let  list = res.result.content;
@@ -46,19 +51,18 @@ getDataFromServer("/api/pedigree/myJoinlist",{currentPage:1,limit:2},function (r
                     '<span class="jiapu-addr">'+item.city+item.county +'</span>' +
                     '</div>' +
                     '<div class="jiapu mui-h4">' +
-                    '<span>'+item.nickname +'</span>创' +
+                    '<span class="shu">'+item.nickname +'</span>创' +
                     '<span class="shu">|</span>' +
                     '<span>'+item.personNumber +'</span>人</div>' +
                     '</li>';
-
             }
-            if (res.totalElements > 2 ){
-                record += '<li class="mui-table-view-cell mui-media">' +
+            // if (res.totalElements > 2 ){
+                record += '<li class="mui-table-view-cell mui-media" onclick="more()">' +
                     '<a id="icon-more" style="text-align: center;">' +
                     '<span class="mui-icon mui-icon-more-filled"></span>' +
                     '</a>' +
                     '</li>'
-            }
+            // }
             $("ul").append(record)
         }else {
             $("ul").append('<li class="mui-table-view-cell mui-media"><div class="mui-h3 jiapu">你还没有加入家谱</div></li>')

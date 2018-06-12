@@ -73,7 +73,7 @@ var accessPwd = true;
             "province": "string",
             "city": "string",
             "county": "string",
-            "gen": "string",
+            "gen": $(".gen").val(),
             "houseRules": $(".houseRules").val(),
             "musicBook": $(".musicBook").val(),
             "surname": $(".surname").val(),
