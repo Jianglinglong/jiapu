@@ -99,8 +99,8 @@ var accessPwd = true;
     $("#create").click(function () {
         var data = {
 			"flagPwd":accessPwd,
-            "accessPwd": $("#textarea").html(),
-            "ancestralHall": $(".ancestralHall").val(),
+            "accessPwd": $(".accessPwd").val(),
+            "ancestralHall": $("#textarea").html(),
             "church": $(".church").val(),
             "province": "string",
             "city": "string",
