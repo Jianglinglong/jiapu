@@ -1,7 +1,7 @@
 document.write('<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js?version=1.1"></script>')
 $(document).ready(function(){
 				var userInfo = window.localStorage.getItem("userInfo");
-				var shareUserId = null;
+				var shareUserId = "";
 				if(null != userInfo){
 					shareUserId = JSON.parse(userInfo).userId;
 				}
@@ -11,7 +11,7 @@ $(document).ready(function(){
     	/***用于获得当前连接url用**/
         //alert(window.location.href);
         /***用户点击分享到微信圈后加载接口接口*******/
-        $.get(urlBase + "/api/wexin_mp/v_1/config",{"url":window.location.href},function(data,status){
+        $.get("//api.yunji128.com/homage/api/wexin_mp/v_1/config",{"url":window.location.href.split("#")[0]},function(data,status){
             console.log(data.appId+" "+data.timestamp+" "+data.nonceStr+" "+data.signature);
             wx.config({
                 debug: false,
