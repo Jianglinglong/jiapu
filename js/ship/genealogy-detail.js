@@ -294,10 +294,10 @@ WY.genealogy = function (options) {
             }
             this.ele.append('<div class="fz-16"><div class="btn btn-small ' + (data.survivalMode == '活' ?
                     'btn-primary' : '') + '">' +
-                '<img class="img-circle .img-responsive" width="28" height="28" src="' + (data.headImg ? imgBase+ data.headImg.replace(imgBase,"") : "../img/boy.jpg") + '"/>' +
+                '<img class="img-circle .img-responsive" width="28" height="28" src="' + (data.headImg ? imgBase+ data.headImg.replace(imgBase,"")+"_crop_28x28" : "../img/boy.jpg") + '"/>' +
                 '<div class="jiapu-name">' + (data.name || "未知") + '</div></div>' +
                 '<div class="btn btn-small ' + (data.spouseSurvivalMode == '活' ? 'btn-primary' : '') +
-                '"><img class="img-circle .img-responsive" width="28" height="28" src="' + (data.spouseHeadImg ? imgBase+data.spouseHeadImg.replace(imgBase,"") : "../img/girl.jpg") + '"/>' +
+                '"><img class="img-circle .img-responsive" width="28" height="28" src="' + (data.spouseHeadImg ? imgBase+data.spouseHeadImg.replace(imgBase,"")+"_crop_28x28" : "../img/girl.jpg") + '"/>' +
                 '<div class="jiapu-name">' + (data.spouseName || "未知") + '</div></div>' +
                 '</div>');
             if (belong) {

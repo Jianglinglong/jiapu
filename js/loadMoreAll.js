@@ -14,7 +14,7 @@ $(window).scroll(function () {
     }
 });
 function defaultImgUrl(obj) {
-    obj.src = defaultImg;
+    obj.src = defaultImg+'_crop_42x42';
 }
 function goJiapu(id) {
     window.location.href = "editship.html?pedigreeId="+id;
@@ -27,7 +27,7 @@ function loadMore() {
                 var record = "";
                 for (let item of list) {
                     record += '<li class="mui-table-view-cell mui-media" onclick="goJiapu('+item.pedigreeId+')">' +
-                        '<img onerror="defaultImgUrl(this)"  class="mui-media-object mui-pull-left" src="' +imgBase+ item.totem + '">' +
+                        '<img onerror="defaultImgUrl(this)"  class="mui-media-object mui-pull-left" src="' +imgBase+ item.totem +'_crop_42x42'+ '">' +
                         '<div class="mui-media-body">' + item.nickname +
                         '<p>' + item.nickname + '</p>' +
                         '<p class="time">' + item.rowAddTime + '</p>' +

@@ -162,9 +162,9 @@ function upload(img, file, form) {
             },
             success: function (data) {
                 if (data.code == 'SUCCESS') {
-                    var imgSrc = imgBase + data.result.path;
+                    var imgSrc = imgBase + data.result.path+"_crop_28x28";
                     img.attr("src", imgSrc);
-                    img.next().val(imgSrc);
+                    img.next().val(data.result.path);
                     console.log(img.next())
                 } else {
                     console.log(data.message);
