@@ -88,5 +88,5 @@ function loadJiapu(content) {
         alert(error);
     });
 }
-var shousou = "";
+var shousou = null;
 loadJiapu(shousou);
