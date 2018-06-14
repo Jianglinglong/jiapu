@@ -68,8 +68,8 @@
     </script>
     <!--搜索-->
     <div class="mui-input-row mui-search">
-        <input type="search" id="shousou" onkeyup="enterSearch(event)" class="mui-input-clear "
-               placeholder="馆号|馆名|被纪念人姓名">
+        <input form="search" type="search" id="shousou"  class="mui-input-clear " placeholder="馆号|馆名|被纪念人姓名">
+        <form id="search"></form>
     </div>
     <!--  选项卡-->
     <div class="mui-slider">
@@ -240,22 +240,27 @@
             });
         }
 
+        $("#search").submit(function () {
+            $("#shousou").blur();
+            var content = $("#shousou").val();
+            console.log(content);
+            $(".mui-control-item.mui-active").each(function () {
+                if ('私人馆' == $(this).html()) {
+                    alist(content);
+                }
+                if ('公益馆' == $(this).html()) {
+                    blist(content);
+                }
+                if ('最旺馆' == $(this).html()) {
+                    clist(content);
+                }
+            });
+            return false;
+        });
+
         function enterSearch(e) {
             if (e.keyCode == 13) {
-                $("#shousou").blur();
-                var content = $("#shousou").val();
-                console.log(content);
-                $(".mui-control-item.mui-active").each(function () {
-                    if ('私人馆' == $(this).html()) {
-                        alist(content);
-                    }
-                    if ('公益馆' == $(this).html()) {
-                        blist(content);
-                    }
-                    if ('最旺馆' == $(this).html()) {
-                        clist(content);
-                    }
-                });
+
             }
         }
     </script>
