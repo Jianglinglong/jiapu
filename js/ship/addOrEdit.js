@@ -14,10 +14,21 @@ function addSomme(user, parent,direct) {
 
 function showSomeOne(user) {
     history.pushState("", document.title, "#show");
-    showBox(false, user)
-    initUserInfo(user.data)
-    $("input").attr("disabled","disabled");
-    $(".mui-bar").hide();
+    user =user.data;
+    $(".show-canvas-content").hide();
+    $("#edit").hide();
+    for (var item in user){
+        if (item == "headImg" || item == "spouseHeadImg"){
+            if (user[item]){
+                $(".info-"+item).attr("src",imgBase+ user[item] + '_crop_172x172');
+            }
+        }else {
+            $(".info-"+item).html(user[item]);
+        }
+    }
+    $(".info-addr").html(user.xjProvince +" " +user.xjCity + " " + user.xjCounty);
+    $(".info-spouseAddr").html(user.spouseXjProvince +" " +user.spouseXjCity + " " + user.spouseXjCounty);
+    $("#info").show();
 }
 
 function initUserInfo(user) {
@@ -45,6 +56,7 @@ function showJiapu() {
     $("#submit").unbind();
     $(".show-canvas-content").show();
     $("#edit").hide();
+    $("#info").hide();
     if (dtpicker && dtpicker.dispose) {
         dtpicker.dispose();
     }

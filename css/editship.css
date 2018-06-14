@@ -43,7 +43,7 @@
      float: none;
  }
 
- #edit {
+ #edit ,#info{
      display: none;
  }
 
@@ -80,3 +80,4 @@
   .mui-bar .mui-btn{top: 0}
   .boy{color: yellowgreen}
   .girl{color: white}
+ .mui-input-row label:last-child{width: auto;max-width: 60%;overflow: hidden;text-overflow: ellipsis}
