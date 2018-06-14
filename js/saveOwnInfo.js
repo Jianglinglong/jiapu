@@ -57,10 +57,10 @@ $(function () {
         console.log(info)
         postDataToServer("/api/pedigree/myPedigreeUserInfoSave", JSON.stringify(info), function (res) {
             if (res.code == "SUCCESS") {
-                alert("保存成功")
+                mui.alert("保存成功")
                 history.back();
             } else {
-                alert(res.message)
+                mui.alert(res.message)
             }
             console.log(res)
         }, function (error) {
@@ -86,7 +86,7 @@ $(function () {
                 processData: false, // 告诉jQuery不要去处理发送的数据
                 contentType: false, // 告诉jQuery不要去设置Content-Type请求头
                 error: function (request) {
-                    //layer.alert('添加出现异常', {icon: 5});
+                    //layer.mui.alert('添加出现异常', {icon: 5});
                 },
                 success: function (data) {
                     if (data.code == 'SUCCESS') {

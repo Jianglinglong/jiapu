@@ -341,12 +341,13 @@ WY.genealogy = function (options) {
         var itemClick = $(this).closest("[code]");
         editId = itemClick.attr("code");
         let obj = item.getById(editId);
-        var left =parseInt(itemClick.css("left")) + itemClick.width();
-        var top = parseInt(itemClick.css("top"));
+        var left =parseInt(itemClick.css("left")) ;
+        var top = parseInt(itemClick.css("top")) +itemClick.height();
         kyoPopupMenu.user = obj;
         kyoPopupMenu.id = editId;
         obj = obj.data;
         let  index = $(this).index();
+        kyoPopupMenu.memorialId = index ==0 ? obj.memorialId : obj.spouseMemorialId;
         kyoPopupMenu.phone = index == 0 ? obj.phone : obj.spousePhone;
         kyoPopupMenu.name =  index == 0 ? obj.name : obj.spouseName;
         kyoPopupMenu.sys().css({left: left,top: top}).show();
@@ -543,7 +544,7 @@ kyoPopupMenu = (function(){
         sys: function (obj) {
             $('.popup_menu').remove();
             popupMenuApp =
-                $('<div class="popup_menu app-menu"><ul><li><a menu="menu1">人物视觉</a></li><li><a menu="menu2">个人信息</a></li></ul></div>').
+                $('<div class="popup_menu app-menu"><ul><li><a menu="menu1">人物视觉</a></li><li><a menu="menu2">个人信息</a></li><li><a menu="menu3">纪念馆</a></li></ul></div>').
                 find('a').attr('href','javascript:;').end().appendTo('.position-relative');
             //绑定事件
             $('.app-menu a[menu="menu1"]').on('click', function (){
@@ -553,17 +554,24 @@ kyoPopupMenu = (function(){
                         if (res.result){
                             location.href = "editship.html?pedigreeId="+res.result;
                         }else {
-                            alert(kyoPopupMenu.name +"还没有创建人物视角");
+                            mui.alert(kyoPopupMenu.name +"还没有创建人物视角");
                         }
                     },function (error) {
                         console.log(error);
                     })
                 }else {
-                    alert(kyoPopupMenu.name +"还没有创建人物视角");
+                    mui.alert(kyoPopupMenu.name +"还没有创建人物视角");
                 }
             });
             $('.app-menu a[menu="menu2"]').on('click', function (){
                 showSomeOne(kyoPopupMenu.user);
+            });
+            $('.app-menu a[menu="menu3"]').on("click",function () {
+                if (!kyoPopupMenu.memorialId){
+                    mui.alert(kyoPopupMenu.name +"还没有创建纪念馆");
+                }else {
+                    goJiNianGuan(kyoPopupMenu.memorialId);
+                }
             });
             return popupMenuApp;
         },

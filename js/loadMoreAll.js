@@ -48,7 +48,7 @@ function loadMore(content) {
             }
             page++;
         } else {
-            alert(res.message)
+            mui.alert(res.message)
         }
     }, function (error) {
         console.log(JSON.stringify(error));

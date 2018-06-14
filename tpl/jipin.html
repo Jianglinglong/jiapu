@@ -102,11 +102,11 @@
 					      url: urlBase + "/api/sacrifice/doSG?sacrificeId="+sacrificeId+"&memorialId="+memorialId, //这里是网址
 					      success:function(data){
 							if(data.code=='SUCCESS'){
-								alert("祭拜成功~~");
+								mui.alert("祭拜成功~~");
 								window.location.href = document.referrer;//返回上一页并刷新  
 							}
 							else{
-								alert(data.message);
+								mui.alert(data.message);
 								window.location.href = document.referrer;//返回上一页并刷新  
 							}
 						 }

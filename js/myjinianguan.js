@@ -17,7 +17,7 @@ $.ajax({
             window.location.href = 'login.html';
         }
         else {
-            alert(data.message);
+            mui.alert(data.message);
         }
     },
     error: function (message) {
@@ -47,7 +47,7 @@ $.ajax({
         addHtml(listPersonal,$("#mpersonal"))
     },
     error: function (message) {
-        //alert("读取私人馆列表失败");
+        //mui.alert("读取私人馆列表失败");
     }
 });
 /*item2*/
@@ -65,7 +65,7 @@ $.ajax({
         addHtml(listcelebrity,$("#mcelebrity"))
     },
     error: function (message) {
-        //alert("读取公益馆列表失败");
+        //mui.alert("读取公益馆列表失败");
     }
 });
 /*item3*/
@@ -83,7 +83,7 @@ $.ajax({
         addHtml(listrenqi,$("#renqi"))
     },
     error: function (message) {
-        //alert("读取纪念馆列表失败");
+        //mui.alert("读取纪念馆列表失败");
     }
 });
 function addHtml(list, target) {
@@ -114,11 +114,11 @@ function info(id) {
                     window.location.href = "jinianguanDetail.html?memorialId=" + id;
                 } else {
                     //
-                    alert("请输入密码");
+                    mui.alert("请输入密码");
                 }
             }
             else {
-                alert(data.message);
+                mui.alert(data.message);
             }
         },
         error: function (message) {
@@ -142,11 +142,11 @@ function phnoInfo(id) {
                 if (data.result) {
                     window.location.href = "upMemorPhone.html?memorialId=" + id;
                 } else {
-                    alert("请输入密码");
+                    mui.alert("请输入密码");
                 }
             }
             else {
-                alert(data.message);
+                mui.alert(data.message);
             }
         },
         error: function (message) {
@@ -168,11 +168,11 @@ function pepoleInfo(id) {
                     window.location.href = "reviseLife.html?memorialId=" + id;
                 } else {
                     //
-                    alert("请输入密码");
+                    mui.alert("请输入密码");
                 }
             }
             else {
-                alert(data.message);
+                mui.alert(data.message);
             }
         },
         error: function (message) {
@@ -194,11 +194,11 @@ function deleteInfo(id) {
                     window.location.href = "delMemorial.html?memorialId=" + id;
                 } else {
                     //
-                    alert("请输入密码");
+                    mui.alert("请输入密码");
                 }
             }
             else {
-                alert(data.message);
+                mui.alert(data.message);
             }
         },
         error: function (message) {
@@ -220,11 +220,11 @@ function muxiangInfo(id) {
                     window.location.href = "muxiangInfo.html?memorialId=" + id;
                 } else {
                     //
-                    alert("请输入密码");
+                    mui.alert("请输入密码");
                 }
             }
             else {
-                alert(data.message);
+                mui.alert(data.message);
             }
         },
         error: function (message) {

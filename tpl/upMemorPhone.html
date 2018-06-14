@@ -99,7 +99,7 @@
 						}
 			},	   
 			 		error: function (message) {  
-		                alert("提交数据失败！");  
+		                mui.alert("提交数据失败！");
 		            }  
 	       });
 	//点击添加照片上传照片路径
@@ -130,14 +130,14 @@
 					processData: false,  // 告诉jQuery不要去处理发送的数据
 					contentType: false,   // 告诉jQuery不要去设置Content-Type请求头
 					error : function(request) {
-						//layer.alert('添加出现异常', {icon: 5});
+						//layer.mui.alert('添加出现异常', {icon: 5});
 					},
 					success : function(data) {
 						if (data.code == 'SUCCESS') {
 							//$("#myimgID").attr("src",imgBase+data.result.path);
 							editImg(data.result.path,fileFormat);
 						} else {
-							alert(data.message);
+							mui.alert(data.message);
 						}
 					}
 				}); 
@@ -165,16 +165,16 @@
 						dataType: "json",  
 						success: function (data) {
 							if(data.code=='SUCCESS'){
-								alert("上传成功!");
+								mui.alert("上传成功!");
 								window.location.reload();
 								//window.location.href="upMemorPhone.html";							
 							}
 							else{
-								alert(data.message)
+								mui.alert(data.message)
 							}
 						},  
 						error: function (message) {  
-							alert("提交数据失败！");  
+							mui.alert("提交数据失败！");
 						}  
 				   });
 		    }

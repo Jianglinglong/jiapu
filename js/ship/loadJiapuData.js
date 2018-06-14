@@ -129,3 +129,59 @@ if (user) {
     user ={};
 }
 var maxLength=0;
+
+function goJiNianGuan(id) {
+    $.ajax({
+        headers: {
+            tokenInfo: window.localStorage.getItem("tokenInfo")
+        },
+        type: "POST",
+        url: urlBase + "/api/memorial/checkAccess?memorialId=" + id,
+        data: {},
+        dataType: "json",
+        success: function (data) {
+            if (data.code == 'SUCCESS') {
+                if (data.result) {
+                    window.location.href = "jinianguanDetail.html?memorialId=" + id;
+                } else {
+                    mui.prompt('请输入密码访问：', '密码', '纪念馆', ['取消', '确定'], function(e) {
+                        if (e.index == 1) {
+                            checkPwd( e.valu, id);
+                        }
+                    });
+                    // if (inputPwd = prompt("请输入密码访问")) {
+                    //     checkPwd(inputPwd, id);
+                    // }
+                }
+            }
+            else {
+                mui.alert(data.message);
+            }
+        },
+        error: function (message) {
+        }
+    });
+}
+
+function checkPwd(pwd, id) {
+    $.ajax({
+        headers: {
+            tokenInfo: window.localStorage.getItem("tokenInfo"),
+            userId: 0
+        },
+        type: "GET",
+        url: urlBase + "/api/memorial/accessMemorialcheckPassWorld?password=" + pwd + "&memorialId=" + id,
+        data: {},
+        dataType: "json",
+        success: function (data) {
+            if (data.code == 'SUCCESS') {
+                window.location.href = "jinianguanDetail.html?memorialId=" + id + "&password=" + pwd;
+            }
+            else {
+                mui.alert(data.message);
+            }
+        },
+        error: function (message) {
+        }
+    });
+}

@@ -93,11 +93,11 @@
 						}
 	                }
 	                else{
-	                	alert(data.message)
+	                	mui.alert(data.message)
 	                }
 				  },
 			      error: function (message) {
-			      	alert("读取姓氏列表失败");
+			      	mui.alert("读取姓氏列表失败");
 			      }
 		    });
 		
@@ -133,7 +133,7 @@
 					document.getElementById('modelChose').innerHTML = contens;
 				},
 		      	error: function (message) {
-		      		alert("读取姓氏列表失败");
+		      		mui.alert("读取姓氏列表失败");
 		      	}
 		    });
 			
@@ -150,11 +150,11 @@
 				var joinType = $("#joinType").val();
 			    var password = $('#password').val();
 			    if(memorialName == ''){
-					alert("请输入纪念馆名字");
+					mui.alert("请输入纪念馆名字");
 					return;
 				}
 				if(memorialModelId == ''){
-					alert("请选择一个模版");
+					mui.alert("请选择一个模版");
 					return;
 				}
 				var requestBody = {
@@ -176,15 +176,15 @@
 	                dataType: "json",  
 	                success: function (data) {
 	                	if(data.code=='SUCCESS'){
-	                		alert("修改成功~~~~~~~");
+	                		mui.alert("修改成功~~~~~~~");
 	                		window.location.href="myjinianguan.html"
 	                	}
 	                	else{
-	                		alert(data.message)
+	                		mui.alert(data.message)
 	                	}
 	                },  
 	                error: function (message) {  
-	                    alert("提交数据失败！");  
+	                    mui.alert("提交数据失败！");
 	                }  
 	           });
 			});

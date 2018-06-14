@@ -21,7 +21,7 @@ $(function () {
                 processData: false, // 告诉jQuery不要去处理发送的数据
                 contentType: false, // 告诉jQuery不要去设置Content-Type请求头
                 error: function (request) {
-                    //layer.alert('添加出现异常', {icon: 5});
+                    //layer.mui.alert('添加出现异常', {icon: 5});
                 },
                 success: function (data) {
                     if (data.code == 'SUCCESS') {
@@ -51,7 +51,7 @@ $(function () {
                 processData: false, // 告诉jQuery不要去处理发送的数据
                 contentType: false, // 告诉jQuery不要去设置Content-Type请求头
                 error: function (request) {
-                    //layer.alert('添加出现异常', {icon: 5});
+                    //layer.mui.alert('添加出现异常', {icon: 5});
                 },
                 success: function (data) {
                     if (data.code == 'SUCCESS') {
@@ -124,11 +124,11 @@ var accessPwd = true;
 				    localStorage.setItem("jiapu",JSON.stringify(res.result));
 					window.location.href="editship.html?pedigreeId="+res.result.pedigreeId;
 				}else{
-					alert(res.message)
+					mui.alert(res.message)
 				}
 			},function(error){console.log(error)})
         }else{
-			alert("请填写祖籍！")
+			mui.alert("请填写祖籍！")
 		}
     })
     $(".mui-icon-plusempty").click(function () {
@@ -146,7 +146,7 @@ var accessPwd = true;
             processData: false, // 告诉jQuery不要去处理发送的数据
             contentType: false, // 告诉jQuery不要去设置Content-Type请求头
             error: function (request) {
-                //layer.alert('添加出现异常', {icon: 5});
+                //layer.mui.alert('添加出现异常', {icon: 5});
             },
             success: function (data) {
                 if (data.code == 'SUCCESS') {

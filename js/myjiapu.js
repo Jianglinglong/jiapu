@@ -20,18 +20,18 @@ getDataFromServer("/api/pedigree/myPedigreeUserInfo", null, function (res) {
                     }
                 }
             }, function (error) {
-                alert(error);
+                mui.alert(error);
             });
         } else {
             $("#submit").click(function () {
-                alert("请先完善个人信息");
+                mui.alert("请先完善个人信息");
             })
         }
     } else {
         window.location.href = "login.html"
     }
 }, function (error) {
-    alert(error);
+    mui.alert(error);
 });
 
 function jiapuInfo(id) {
@@ -85,7 +85,7 @@ function loadJiapu(content) {
             }
         }
     }, function (error) {
-        alert(error);
+        mui.alert(error);
     });
 }
 var shousou = null;

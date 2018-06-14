@@ -81,11 +81,11 @@
         		window.location.href='login.html';
         	}
         	else{
-        		alert(data.message);
+        		mui.alert(data.message);
         	}
         },  
         error: function (message) {  
-            alert("提交数据失败！");  
+            mui.alert("提交数据失败！");
         }  
    });
 			
@@ -110,7 +110,7 @@
 							$("#myimgID").attr("src",imgBase+data.result.path);
 							editImg(data.result.path);
 						} else {
-							alert(data.message);
+							mui.alert(data.message);
 						}
 					}
 				});
@@ -127,15 +127,15 @@
 	                dataType: "json",  
 	                success: function (data) {
 	                	if(data.code=='SUCCESS'){
-	                		alert("修改头像成功~~~~~~~");
+	                		mui.alert("修改头像成功~~~~~~~");
 	                		//window.location.reload();
 	                	}
 	                	else{
-	                		alert(data.message)
+	                		mui.alert(data.message)
 	                	}
 	                },  
 	                error: function (message) {  
-	                    alert("提交数据失败！");  
+	                    mui.alert("提交数据失败！");
 	                }  
 	           });
 		    }

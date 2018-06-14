@@ -188,11 +188,11 @@
 						}
 					
 					} else {
-						alert(data.message)
+						mui.alert(data.message)
 					}
 				},
 				    error: function(message) {      
-					alert("读取人物信息失败");      
+					mui.alert("读取人物信息失败");      
 				}    
 			});
 			$("#save").click(function() {
@@ -211,7 +211,7 @@
 					}
 					if(stem == 2){
 						if(''==$("[name='personName2']").val()){
-							alert("人二名字不能为空");
+							mui.alert("人二名字不能为空");
 						}
 						memorialPerson = [
 						    {
@@ -242,17 +242,17 @@
 					dataType: "json",
 					success: function(data) {
 						if(data.code == 'SUCCESS') {
-							alert("修改成功！");
+							mui.alert("修改成功！");
 							window.location.href = "myjinianguan.html"
 						} else {
-							alert(data.message);
+							mui.alert(data.message);
 						}
 
 					},
 
 					error: function(message) {
 
-						alert("提交数据失败！");
+						mui.alert("提交数据失败！");
 
 					}
 

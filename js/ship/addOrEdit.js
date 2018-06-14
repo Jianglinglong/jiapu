@@ -123,13 +123,13 @@ function submitBtnClick(api, parent, own, type,direct) {
         info.pedigreeId = pedigreeId;
         postDataToServer(api, JSON.stringify(info), function (res) {
             if (res.code == "SUCCESS") {
-                alert("保存成功");
+                mui.alert("保存成功");
                 sessionStorage.setItem("reload","reload")
                 history.back();
             } else if(res.code == "PleaseLogin") {
                 location.href = "login.html"
             }else {
-                alert(res.message)
+                mui.alert(res.message)
             }
             console.log(res)
         }, function (error) {
@@ -158,7 +158,7 @@ function upload(img, file, form) {
             processData: false, // 告诉jQuery不要去处理发送的数据
             contentType: false, // 告诉jQuery不要去设置Content-Type请求头
             error: function (request) {
-                //layer.alert('添加出现异常', {icon: 5});
+                //layer.mui.alert('添加出现异常', {icon: 5});
             },
             success: function (data) {
                 if (data.code == 'SUCCESS') {
