@@ -31,10 +31,10 @@ function loadMore(content) {
                 for (let item of list) {
                     record += '<li class="mui-table-view-cell mui-media" onclick="goJiapu(' + item.pedigreeId + ')">' +
                         '<img onerror="defaultImgUrl(this)"  class="mui-media-object mui-pull-left" src="' + imgBase + item.totem + '_crop_42x42' + '">' +
-                        '<div class="mui-media-body">' + item.nickname +
-                        '<p>' + item.nickname + '</p>' +
-                        '<p class="time">' + item.rowAddTime + '</p>' +
-                        '<p class="addr">' + item.province + item.city + item.county + '</p>' +
+                        '<div class="mui-media-body">' + item.surname  +
+                        '<p><span class="shu">'+ item.nickname +'</span>创<span class="shu">|</span><span>'+item.personNumber+'</span>人</p>' +
+                        '<p class="time">' + item.rowAddTime.substring(0,10) + '</p>' +
+                        '<p class="addr">' + item.province +' ' + item.city +' '+ item.county + '</p>' +
                         '</div>' +
                         '</li>';
                 }
