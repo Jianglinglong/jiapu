@@ -87,14 +87,14 @@ $.ajax({
     }
 });
 function addHtml(list, target) {
-    var memorialrenqi = "";
+    var html = "";
     $.each(list, function () {
-        memorialrenqi += '<li class="mui-media list1"><a href="javascript:info(' + this.memorialId + ');"><h4>' + this.memorialName + '</h4>' +
+        html += '<li class="mui-media list1"><a href="javascript:info(' + this.memorialId + ');"><h4>' + this.memorialName + '</h4>' +
             '<img class="mui-media-object mui-pull-left" src="' + imgBase + this.headImg + '">' +
             '<div class="mui-media-body"><ul class="smallul"><li>馆号：<span>' + this.userId + '</span></li><li>建馆人：<span>' + this.nickname + '</span></li></ul>' +
             '<ul class="smallul"><li>祭拜数：<span>' + this.worshipCount + '</span></li><li>建馆时间：<span>' + this.rowAddTime + '</span></li></ul></div></a><div class="editMem"><a  href="javascript:phnoInfo(' + this.memorialId + ');">相册</a><a href="javascript:pepoleInfo(' + this.memorialId + ');">编辑</a><a  href="javascript:muxiangInfo(' + this.memorialId + ');">墓像</a><a href="javascript:deleteInfo(' + this.memorialId + ');">删除</a></div></li>'
     });
-   target.html(memorialrenqi);
+   target.html(html);
 }
 /*function*/
 function info(id) {
