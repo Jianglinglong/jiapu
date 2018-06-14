@@ -47,7 +47,7 @@
   		<!--<img id="mubeixiang"  src=""/>-->
   		<!--<span id="muzi" >张国荣之墓</span>-->
   	</div>
-		<div class="changBuid">更换场景</div>
+		<div class="changBuid" style="display: none;">更换场景</div>
 		
 		<script type="application/javascript">
 //单人室内
@@ -361,6 +361,15 @@
 	    		window.location.href='login.html';
 	    		
 	    	}
+				
+				var userInfo = window.localStorage.getItem("userInfo");
+				if(null != userInfo){
+					var thisUserId = JSON.parse(userInfo).userId;
+					if(thisUserId == data.result.userId){
+						$('.changBuid').show();
+					}
+				}
+				
 		 }
     });
 

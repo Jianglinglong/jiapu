@@ -486,6 +486,12 @@ WY.genealogy = function (options) {
                 left: a.offsetTop - options.itemHeight / 2 - options.circleRadius
             }).show();
             $content.append(a.ele);
+            if (a.data.flagCreator) {
+                jQuery('.show-canvas-content').animate({
+                    scrollTop: (a.level - 2) * options.stepWidth + options.itemLeft
+                    ,scrollLeft:a.offsetTop - options.itemHeight / 2 - options.circleRadius-options.itemHeight
+                }, 0);
+            }
             if (a.showChildren && a.children.length) {
                 var level = a.offsetTop + options.concatLineTop;
                 // var level = getLeft(a, index)
@@ -523,7 +529,8 @@ WY.genealogy = function (options) {
 					a.ele.css("left",parent.ele.css("left"))
 				}
 			}
-        })
+        });
+
     }
     createElement(dataList);
     resetItemObject();
