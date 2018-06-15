@@ -11,7 +11,6 @@ function addSomme(user, parent,direct) {
     $("input[name=survivalMode][value=活]").prop("checked", "checked");
     submitBtnClick("/api/pedigreePerson/add", parent, user.id, true,direct);
 }
-
 function showSomeOne(user,index) {
     history.pushState("", document.title, "#show");
     user =user.data;
@@ -25,9 +24,8 @@ function showSomeOne(user,index) {
             $(".info-phone").html(user.phone);
             $(".info-survivalMode").html(user.survivalMode);
             $(".info-addr").html(user.xjProvince +" " +user.xjCity + " " + user.xjCounty);
+           hideAll();
             $("#info").show();
-            $(".show-canvas-content").hide();
-            $("#edit").hide();
         }else {
             mui.alert("没有信息");
         }
@@ -35,29 +33,30 @@ function showSomeOne(user,index) {
         if (user.spouseName) {
             $(".info-headImg").attr("src",imgBase+ user.spouseHeadImg + '_crop_172x172');
             $(".info-name").html(user.spouseName);
-            // $(".info-sex").html(user.sex);
+            $(".info-sex").html(user.sex=="男"?"女":"男");
             $(".info-birthDay").html(user.spouseBirthDay);
             $(".info-memorialId").html(user.spouseMemorialId);
             $(".info-phone").html(user.spousePhone);
             $(".info-survivalMode").html(user.spouseSurvivalMode);
             $(".info-addr").html(user.spouseXjProvince +" " +user.spouseXjCity + " " + user.spouseXjCounty);
+            hideAll();
             $("#info").show();
-            $(".show-canvas-content").hide();
-            $("#edit").hide();
         }else {
             mui.alert("没有信息");
         }
     }
-    // for (var item in user){
-    //     if (item == "headImg" || item == "spouseHeadImg"){
-    //         if (user[item]){
-    //             $(".info-"+item).attr("src",imgBase+ user[item] + '_crop_172x172');
-    //         }
-    //     }else {
-    //         $(".info-"+item).html(user[item]);
-    //     }
-    // }
+}
 
+function showShip() {
+    history.pushState("",document.title,"#ship");
+    hideAll();
+    $("#ship").show();
+}
+function hideAll() {
+    $("#edit").hide();
+    $("#info").hide();
+    $("#ship").hide();
+    $(".show-canvas-content").hide();
 }
 
 function initUserInfo(user) {
@@ -80,34 +79,49 @@ function initUserInfo(user) {
     $("#cityResult2").val(user.xjProvince + " " + user.xjCity + " " + user.xjCounty);
     $("#cityResult3").val(user.spouseXjProvince + " " + user.spouseXjCity + " " + user.spouseXjCounty);
 }
-
+$("#showShip").click(function () {
+    showShip();
+});
+$("#download").click(function () {
+    var url = $(this).attr("rel");
+    if ( /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/.test(url) ){
+        var $eleForm = $("<form method='get' style='display: none'></form>");
+        $eleForm.attr("action",url);
+        $(document.body).append($eleForm);
+        //提交表单，实现下载
+        $eleForm.submit();
+        $eleForm.remove();
+    }else{
+        mui.alert("没有上传谱书")
+    }
+});
 function showJiapu() {
     $("#submit").unbind();
+    hideAll();
     $(".show-canvas-content").show();
-    $("#edit").hide();
-    $("#info").hide();
-    if (dtpicker && dtpicker.dispose) {
+    if (dtpicker && dtpicker.picker) {
         dtpicker.dispose();
     }
-    if (dtpicker2 && dtpicker2.dispose) {
+    if (dtpicker2 && dtpicker2.picker) {
         dtpicker2.dispose();
     }
-    if (cityPicker2 && cityPicker2.dispose) {
+    if (cityPicker2 && cityPicker2.parentNode) {
         cityPicker2.dispose();
     }
-    if (cityPicker3 && cityPicker3.dispose) {
+    if (cityPicker3 && cityPicker3.parentNode) {
         cityPicker3.dispose();
     }
 }
 
 function showBox(type, user) {
+    hideAll();
     var btn = type ? "添加" : "编辑";
     $("input[type=submit]").val(btn);
-    $(".show-canvas-content").hide();
     $("#edit").show();
     initEditBox(user)
 }
 window.addEventListener("popstate", function () {
+    console.log(11)
     if (sessionStorage.getItem("reload")){
         sessionStorage.removeItem("reload");
         window.location.reload();

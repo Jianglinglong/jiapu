@@ -61,4 +61,6 @@ input[type="file"] {
     right: 0;
     bottom:22px;
 }
-img{    vertical-align: middle;}
+img{  vertical-align: middle;}
+.mui-switch.mui-active:before{content: "是"}
+.mui-switch:before{content: "否"}

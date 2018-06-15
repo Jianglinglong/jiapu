@@ -1,3 +1,23 @@
+var url = "/api/pedigree/add";
+ajax({
+    url:"/api/pedigree/myPedigreeInfo",
+    method:"get",
+    success:function (res) {
+        if(res.code=='SUCCESS' && res.result){
+            url = "/api/pedigree/edit";
+            $("input[type=submit]").val("修改家谱");
+            document.title = "修改家谱";
+            for (var item in res.result){
+                $("."+item).val(res.result[item]);
+            }
+            if (res.result.flagPwd){
+                $(".flagPwd").addClass("mui-active");
+            }
+            $("#cityResult3").val(res.result.province + " "+res.result.city + " " +res.result.county);
+            $("#jiapu-tt-img").attr("src",imgBase+ res.result.totem);
+        }
+    }
+});
 $(function () {
     $("#textarea").click(function () {
         $(this).attr("contenteditable","true")
@@ -119,10 +139,14 @@ var accessPwd = true;
             data.province = addr[0];
             data.city = addr[1];
             data.county = addr[2];
-			postDataToServer("/api/pedigree/add",JSON.stringify(data),function(res){
+            var pedigreeId=$(".pedigreeId").val();{}
+            if (pedigreeId){
+                data.pedigreeId = pedigreeId
+            }
+			postDataToServer(url,JSON.stringify(data),function(res){
 				if(res.code == "SUCCESS"){
 				    localStorage.setItem("jiapu",JSON.stringify(res.result));
-					window.location.href="editship.html?pedigreeId="+res.result.pedigreeId;
+					window.location.href="editship.html?pedigreeId="+(data.pedigreeId || res.result.pedigreeId);
 				}else{
 					mui.alert(res.message)
 				}

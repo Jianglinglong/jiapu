@@ -121,7 +121,19 @@ $(function () {
         method:"get",
         success:function (res) {
             if(res.code=='SUCCESS'){
-                console.log(res.result)
+                for (var item in res.result){
+                    $("."+item).val(res.result[item]);
+                }
+                if (res.result.flagPwd){
+                    $(".flagPwd").addClass("mui-active");
+                }
+                $(".addr").val(res.result.province + " "+res.result.city + " " +res.result.county);
+                $("#jiapu-tt-img").attr("src",imgBase+ res.result.totem);
+                $("#ship input").attr("readonly","readonly");
+                if (user.userId !=res.result.userId){
+                    $("#editShip").remove();
+                }
+                $("#download").attr("rel",res.result.musicBook);
             }
         }
     })
