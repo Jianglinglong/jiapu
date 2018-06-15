@@ -24,13 +24,9 @@ $(function () {
         return null;
     }
     pedigreeId = getQueryString("pedigreeId");
-    // $.get(urlBase + "/api/pedigreePerson/personListAll", {
-    //     pedigreeId: pedigreeId
-    // }, function (res) {
-    //     console.log(res)
-    //
-    //     // console.log(p)
-    // });
+    /**
+     * 获取族谱数据
+     */
     ajax({
         method:"get",
         url:"/api/pedigreePerson/personListAll",
@@ -89,6 +85,9 @@ $(function () {
         },
         async:false
     });
+    /**
+     * 判断访问用户是否具有编辑权限
+     */
     ajax({
         method:"get",
         url:"/api/pedigree/info",
@@ -115,6 +114,17 @@ $(function () {
             clearInterval(count);
         }
     });
+
+    ajax({
+        url:"/api/pedigree/info",
+        params:{pedigreeId:pedigreeId},
+        method:"get",
+        success:function (res) {
+            if(res.code=='SUCCESS'){
+                console.log(res.result)
+            }
+        }
+    })
 });
 
 var loadBelong =false;

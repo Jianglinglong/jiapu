@@ -81,3 +81,7 @@
   .boy{color: yellowgreen}
   .girl{color: white}
  .mui-input-row label:last-child{width: auto;max-width: 60%;overflow: hidden;text-overflow: ellipsis}
+
+ .pushu{position: fixed;top:2rem;right: 1rem;padding: 11px 0;z-index: 999;width: 60px;background-color: #5bc0de;text-align: center;opacity:0.5;}
+ .pushu :hover{opacity:1;}
+ .pushu button{margin: 5px 0}
