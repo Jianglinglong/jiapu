@@ -12,23 +12,52 @@ function addSomme(user, parent,direct) {
     submitBtnClick("/api/pedigreePerson/add", parent, user.id, true,direct);
 }
 
-function showSomeOne(user) {
+function showSomeOne(user,index) {
     history.pushState("", document.title, "#show");
     user =user.data;
-    $(".show-canvas-content").hide();
-    $("#edit").hide();
-    for (var item in user){
-        if (item == "headImg" || item == "spouseHeadImg"){
-            if (user[item]){
-                $(".info-"+item).attr("src",imgBase+ user[item] + '_crop_172x172');
-            }
+    if (index == 0) {
+        if (user.name) {
+            $(".info-headImg").attr("src",imgBase+ user.headImg + '_crop_172x172');
+            $(".info-name").html(user.name);
+            $(".info-sex").html(user.sex);
+            $(".info-birthDay").html(user.birthDay);
+            $(".info-memorialId").html(user.memorialId);
+            $(".info-phone").html(user.phone);
+            $(".info-survivalMode").html(user.survivalMode);
+            $(".info-addr").html(user.xjProvince +" " +user.xjCity + " " + user.xjCounty);
+            $("#info").show();
+            $(".show-canvas-content").hide();
+            $("#edit").hide();
         }else {
-            $(".info-"+item).html(user[item]);
+            mui.alert("没有信息");
+        }
+    }else {
+        if (user.spouseName) {
+            $(".info-headImg").attr("src",imgBase+ user.spouseHeadImg + '_crop_172x172');
+            $(".info-name").html(user.spouseName);
+            // $(".info-sex").html(user.sex);
+            $(".info-birthDay").html(user.spouseBirthDay);
+            $(".info-memorialId").html(user.spouseMemorialId);
+            $(".info-phone").html(user.spousePhone);
+            $(".info-survivalMode").html(user.spouseSurvivalMode);
+            $(".info-addr").html(user.spouseXjProvince +" " +user.spouseXjCity + " " + user.spouseXjCounty);
+            $("#info").show();
+            $(".show-canvas-content").hide();
+            $("#edit").hide();
+        }else {
+            mui.alert("没有信息");
         }
     }
-    $(".info-addr").html(user.xjProvince +" " +user.xjCity + " " + user.xjCounty);
-    $(".info-spouseAddr").html(user.spouseXjProvince +" " +user.spouseXjCity + " " + user.spouseXjCounty);
-    $("#info").show();
+    // for (var item in user){
+    //     if (item == "headImg" || item == "spouseHeadImg"){
+    //         if (user[item]){
+    //             $(".info-"+item).attr("src",imgBase+ user[item] + '_crop_172x172');
+    //         }
+    //     }else {
+    //         $(".info-"+item).html(user[item]);
+    //     }
+    // }
+
 }
 
 function initUserInfo(user) {

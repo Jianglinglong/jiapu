@@ -96,7 +96,7 @@ WY.genealogy = function (options) {
         itemHeight: 120,
         itemMargin: 25,
         itemLeftMargin: 15,
-        concatLineColor: '#f00',
+        concatLineColor: '#000',
         concatLineTop: 20,
         stepLineColor: '#eee',
         circleRadius: 5,
@@ -347,12 +347,12 @@ WY.genealogy = function (options) {
         kyoPopupMenu.id = editId;
         obj = obj.data;
         let  index = $(this).index();
+        kyoPopupMenu.index =index;
         kyoPopupMenu.memorialId = index ==0 ? obj.memorialId : obj.spouseMemorialId;
         kyoPopupMenu.phone = index == 0 ? obj.phone : obj.spousePhone;
         kyoPopupMenu.name =  index == 0 ? obj.name : obj.spouseName;
         kyoPopupMenu.sys().css({left: left,top: top}).show();
         return false;
-        // showSomeOne(obj);
     });
 
     //编辑
@@ -564,7 +564,7 @@ kyoPopupMenu = (function(){
                 }
             });
             $('.app-menu a[menu="menu2"]').on('click', function (){
-                showSomeOne(kyoPopupMenu.user);
+                showSomeOne(kyoPopupMenu.user,kyoPopupMenu.index);
             });
             $('.app-menu a[menu="menu3"]').on("click",function () {
                 if (!kyoPopupMenu.memorialId){
