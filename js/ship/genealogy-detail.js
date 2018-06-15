@@ -487,12 +487,6 @@ WY.genealogy = function (options) {
                 left: a.offsetTop - options.itemHeight / 2 - options.circleRadius
             }).show();
             $content.append(a.ele);
-            if (a.data.flagCreator) {
-                jQuery('.show-canvas-content').animate({
-                    scrollTop: (a.level - 2) * options.stepWidth + options.itemLeft
-                    ,scrollLeft:a.offsetTop - options.itemHeight / 2 - options.circleRadius-options.itemHeight
-                }, 0);
-            }
             if (a.showChildren && a.children.length) {
                 var level = a.offsetTop + options.concatLineTop;
                 // var level = getLeft(a, index)
@@ -500,7 +494,12 @@ WY.genealogy = function (options) {
                 a.ele.css({
                     left: level - options.itemHeight / 2 - options.circleRadius
                 }).show();
-
+                if (a.data.flagCreator) {
+                    jQuery('.show-canvas-content').animate({
+                        scrollTop: parseInt(a.ele.css("top"))  -$(window).height()/2 +a.ele.height()
+                        ,scrollLeft:parseInt(a.ele.css("left")) - $(window).width()/2 + a.ele.width()/2
+                    }, 0);
+                }
                 ctx.moveTo(level, a.offsetRight - 20);
                 ctx.lineTo(level, a.stepRight);
                 //console.log(a.offsetRight, a.stepRight)
@@ -525,6 +524,12 @@ WY.genealogy = function (options) {
                 });
 
             }else{
+                if (a.data.flagCreator) {
+                    jQuery('.show-canvas-content').animate({
+                        scrollTop: parseInt(a.ele.css("top"))  -$(window).height()/2 +a.ele.height()
+                        ,scrollLeft:parseInt(a.ele.css("left")) - $(window).width()/2 + a.ele.width()/2
+                    }, 0);
+                }
 				var parent = a.getParent();
 				if(parent && parent.children.length == 1){
 					a.ele.css("left",parent.ele.css("left"))
