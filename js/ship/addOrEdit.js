@@ -15,6 +15,10 @@ function addSomme(user, parent,direct) {
     $("input[type=radio]").removeAttr('checked');
     $("input[name=sex][value=男]").prop("checked", "checked");
     $("input[name=survivalMode][value=活]").prop("checked", "checked");
+    $("input[name=spouseSurvivalMode][value=活]").prop("checked", "checked");
+    $("input[name=sex]:checked").change();
+    $("input[name=survivalMode]:checked").change();
+    $("input[name=spouseSurvivalMode]:checked").change();
     submitBtnClick("/api/pedigreePerson/add", parent, user.id, true,direct);
 }
 
@@ -36,6 +40,13 @@ function showSomeOne(user,index) {
             $(".info-phone").html(user.phone);
             $(".info-survivalMode").html(user.survivalMode);
             $(".info-addr").html(user.xjProvince +" " +user.xjCity + " " + user.xjCounty);
+            if(user.survivalMode == "活"){
+                $(".info-addr-title").html("现居地");
+                $(".info-phone-item").show();
+            }else{
+                $(".info-addr-title").html("墓地");
+                $(".info-phone-item").hide();
+            }
            hideAll();
             $("#info").show();
         }else {
@@ -51,6 +62,13 @@ function showSomeOne(user,index) {
             $(".info-phone").html(user.spousePhone);
             $(".info-survivalMode").html(user.spouseSurvivalMode);
             $(".info-addr").html(user.spouseXjProvince +" " +user.spouseXjCity + " " + user.spouseXjCounty);
+            if(user.spouseSurvivalMode == "活"){
+                $(".info-addr-title").html("现居地");
+                $(".info-phone-item").show();
+            }else{
+                $(".info-addr-title").html("墓地");
+                $(".info-phone-item").hide();
+            }
             hideAll();
             $("#info").show();
         }else {
@@ -391,9 +409,11 @@ $("input[name=survivalMode]").change(function () {
     var checked = this.value;
     console.log(checked)
     if (checked == "活"){
-        $(".survivalMode").html("现居地")
+        $(".survivalMode").html("现居地");
+        $(".phone").show();
     }else {
         $(".survivalMode").html("墓地")
+        $(".phone").hide();
     }
 });
 $("input[name=spouseSurvivalMode]").change(function () {
@@ -401,8 +421,10 @@ $("input[name=spouseSurvivalMode]").change(function () {
     console.log(checked)
     if (checked == "活"){
         $(".spouseSurvivalMode").html("现居地")
+        $(".spousePhone").show();
     }else {
         $(".spouseSurvivalMode").html("墓地")
+        $(".spousePhone").hide();
     }
 });
 

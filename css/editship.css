@@ -80,7 +80,7 @@
   .mui-bar .mui-btn{top: 0}
   .boy{color: yellowgreen}
   .girl{color: white}
- .mui-input-row label:last-child{width: auto;max-width: 60%;overflow: hidden;text-overflow: ellipsis}
+ .mui-input-row label:last-child{width: auto;max-width: 60%;overflow: hidden;text-overflow: ellipsis;padding-right: 0;padding-left: 0;}
 
  .pushu{position: fixed;top:2rem;right: 1rem;padding: 11px 0;z-index: 999;width: 90px;background-color: #5bc0de;text-align: center;opacity:0.2;}
  .pushu:hover{opacity:1;}
