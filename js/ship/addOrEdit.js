@@ -6,7 +6,9 @@
  */
 function addSomme(user, parent,direct) {
     $(".mui-control-content").removeClass("mui-active").eq(0).addClass("mui-active");
-    history.pushState("", document.title, "#add")
+    $(".zuren").addClass("mui-active");
+    $(".spouse ").removeClass("mui-active");
+    history.pushState("", document.title, "#add");
     showBox(true)
     $("#img").attr("src","../img/boy.jpg");
     $("#another").attr("src","../img/girl.jpg");
@@ -286,7 +288,10 @@ window.addEventListener("popstate", function () {
  */
 function editSomeOne(user, parent) {
     if (user) {
-        history.pushState("", document.title, "#edit")
+        $(".mui-control-content").removeClass("mui-active").eq(0).addClass("mui-active");
+        $(".zuren").addClass("mui-active");
+        $(".spouse ").removeClass("mui-active");
+        history.pushState("", document.title, "#edit");
         showBox(false, user)
         initUserInfo(user.data)
         submitBtnClick("/api/pedigreePerson/edit", parent, user.data.pedigreePersonId, false);
