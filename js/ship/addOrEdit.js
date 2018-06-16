@@ -1,3 +1,9 @@
+/**
+ * 添加成员
+ * @param user
+ * @param parent
+ * @param direct
+ */
 function addSomme(user, parent,direct) {
     $(".mui-control-content").removeClass("mui-active").eq(0).addClass("mui-active");
     history.pushState("", document.title, "#add")
@@ -11,6 +17,12 @@ function addSomme(user, parent,direct) {
     $("input[name=survivalMode][value=活]").prop("checked", "checked");
     submitBtnClick("/api/pedigreePerson/add", parent, user.id, true,direct);
 }
+
+/**
+ * 显示个人信息
+ * @param user
+ * @param index
+ */
 function showSomeOne(user,index) {
     history.pushState("", document.title, "#show");
     user =user.data;
@@ -47,11 +59,25 @@ function showSomeOne(user,index) {
     }
 }
 
+
+/**
+ * 显示族谱信息
+ */
 function showShip() {
     history.pushState("",document.title,"#ship");
     hideAll();
     $("#ship").show();
 }
+/**
+ * 显示族谱信息点击事件
+ */
+$("#showShip").click(function () {
+    showShip();
+});
+
+/**
+ * 隐藏所有元素
+ */
 function hideAll() {
     $("#edit").hide();
     $("#info").hide();
@@ -59,6 +85,10 @@ function hideAll() {
     $(".show-canvas-content").hide();
 }
 
+/**
+ * 初始化编辑表单
+ * @param user
+ */
 function initUserInfo(user) {
     $(".mui-control-content").removeClass("mui-active").eq(0).addClass("mui-active");
     for (var item in user) {
@@ -78,164 +108,21 @@ function initUserInfo(user) {
     }
     $("#cityResult2").val(user.xjProvince + " " + user.xjCity + " " + user.xjCounty);
     $("#cityResult3").val(user.spouseXjProvince + " " + user.spouseXjCity + " " + user.spouseXjCounty);
-}
-$("#showShip").click(function () {
-    showShip();
-});
-$("#download").click(function () {
-    var url = $(this).attr("rel");
-    if ( /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/.test(url) ){
-        var $eleForm = $("<form method='get' style='display: none'></form>");
-        $eleForm.attr("action",url);
-        $(document.body).append($eleForm);
-        //提交表单，实现下载
-        $eleForm.submit();
-        $eleForm.remove();
-    }else{
-        mui.alert("没有上传谱书")
-    }
-});
-function showJiapu() {
-    $("#submit").unbind();
-    hideAll();
-    $(".show-canvas-content").show();
-    if (dtpicker && dtpicker.picker) {
-        dtpicker.dispose();
-    }
-    if (dtpicker2 && dtpicker2.picker) {
-        dtpicker2.dispose();
-    }
-    if (cityPicker2 && cityPicker2.parentNode) {
-        cityPicker2.dispose();
-    }
-    if (cityPicker3 && cityPicker3.parentNode) {
-        cityPicker3.dispose();
-    }
+    $("input[name=sex]:checked").change();
+    $("input[name=survivalMode]:checked").change();
+    $("input[name=spouseSurvivalMode]:checked").change();
 }
 
-function showBox(type, user) {
-    hideAll();
-    var btn = type ? "添加" : "编辑";
-    $("input[type=submit]").val(btn);
-    $("#edit").show();
-    initEditBox(user)
-}
-window.addEventListener("popstate", function () {
-    console.log(11)
-    if (sessionStorage.getItem("reload")){
-        sessionStorage.removeItem("reload");
-        window.location.reload();
-    }else {
-        showJiapu()
-    }
-});
-
-function editSomeOne(user, parent) {
-    if (user) {
-        history.pushState("", document.title, "#edit")
-        showBox(false, user)
-        initUserInfo(user.data)
-        submitBtnClick("/api/pedigreePerson/edit", parent, user.data.pedigreePersonId, false);
-    }
-}
-
-function submitBtnClick(api, parent, own, type,direct) {
-    $("input").removeAttr("disabled");
-    $(".mui-bar").show();
-    $("#submit").click(function () {
-        mui(this).button('loading');
-        setTimeout(function() {
-            mui(this).button('reset');
-        }.bind(this), 2000);
-        var info = {};
-        var inputs = $("input[type=text]");
-        for (var i = 0; i < inputs.length; i++) {
-            var name = $(inputs[i]).attr("name");
-            if (name) {
-                info[name] = $(inputs[i]).val();
-            }
-        }
-        var inputs = $("input[type=radio]:checked");
-        for (var i = 0; i < inputs.length; i++) {
-            var name = $(inputs[i]).attr("name");
-            info[name] = $(inputs[i]).val();
-        }
-        delete info.addr;
-        delete info.spouseAddr;
-        if (info.birthDay) {
-            info.birthDay = new Date(info.birthDay).getTime();
-        }
-        if (info.spouseBirthDay) {
-            info.spouseBirthDay = new Date(info.spouseBirthDay).getTime();
-        }
-        /*添加或编辑*/
-        if (type) {
-            info.chouseId = own;
-            info.createType = direct
-        } else {
-            info.pedigreePersonId = own;
-        }
-        info.pedigreeId = pedigreeId;
-        postDataToServer(api, JSON.stringify(info), function (res) {
-            if (res.code == "SUCCESS") {
-                mui.alert("保存成功");
-                sessionStorage.setItem("reload","reload")
-                history.back();
-            } else if(res.code == "PleaseLogin") {
-                location.href = "login.html"
-            }else {
-                mui.alert(res.message)
-            }
-            console.log(res)
-        }, function (error) {
-            console.log(error)
-        });
-    })
-}
-
-
-function upload(img, file, form) {
-    img.unbind()
-    img.click(function () {
-        file.click()
-    });
-    file.unbind("change")
-    file.change(function () {
-        var fileSize = $(this)[0].files[0].size;
-        console.log(fileSize)
-        var path = $(this).val();
-        var jiapuImg = new FormData(form[0]);
-        jiapuImg.set("fileSize", fileSize);
-        $.ajax({
-            type: "POST",
-            url: urlBase + "/file/fileUpload",
-            data: jiapuImg, //FormId
-            processData: false, // 告诉jQuery不要去处理发送的数据
-            contentType: false, // 告诉jQuery不要去设置Content-Type请求头
-            error: function (request) {
-                //layer.mui.alert('添加出现异常', {icon: 5});
-            },
-            success: function (data) {
-                if (data.code == 'SUCCESS') {
-                    var imgSrc = imgBase + data.result.path+"_crop_28x28";
-                    img.attr("src", imgSrc);
-                    img.next().val(data.result.path);
-                    file.val('')
-                    console.log(img.next())
-                } else {
-                    console.log(data.message);
-                }
-            }
-        });
-    })
-}
-
+/**
+ * 初始化表单控件
+ * @param user
+ */
 function initEditBox(user) {
     upload($("#img"), $("#file"), $("#headImg"));
     upload($("#another"), $("#aFile"), $("#aHeadImg"));
     var btns = $(".birth");
     dtpicker = new mui.DtPicker({
-        type: "date", //设置日历初始视图模式 
+        type: "date", //设置日历初始视图模式
         beginDate: new Date(1900, 0, 1), //设置开始日期
         endDate: new Date(2050, 11, 31), //设置结束日期
     })
@@ -249,7 +136,7 @@ function initEditBox(user) {
         })
     });
     dtpicker2 = new mui.DtPicker({
-        type: "date", //设置日历初始视图模式 
+        type: "date", //设置日历初始视图模式
         beginDate: new Date(1900, 0, 1), //设置开始日期
         endDate: new Date(2050, 11, 31), //设置结束日期
     });
@@ -310,4 +197,213 @@ function initEditBox(user) {
         }, 10);
     }
 }
+/**
+ * 现在谱书
+ */
+$("#download").click(function () {
+    var url = $(this).attr("rel");
+    if ( /^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/.test(url) ){
+        var $eleForm = $("<form method='get' style='display: none'></form>");
+        $eleForm.attr("action",url);
+        $(document.body).append($eleForm);
+        //提交表单，实现下载
+        $eleForm.submit();
+        $eleForm.remove();
+    }else{
+        mui.alert("没有上传谱书")
+    }
+});
+
+/**
+ * 显示家谱树
+ */
+function showJiapu() {
+    $("#submit").unbind();
+    hideAll();
+    $(".show-canvas-content").show();
+    if (dtpicker && dtpicker.picker) {
+        dtpicker.dispose();
+    }
+    if (dtpicker2 && dtpicker2.picker) {
+        dtpicker2.dispose();
+    }
+    if (cityPicker2 && cityPicker2.parentNode) {
+        cityPicker2.dispose();
+    }
+    if (cityPicker3 && cityPicker3.parentNode) {
+        cityPicker3.dispose();
+    }
+}
+
+/**
+ * 显示添加 / 编辑表单
+ * @param type
+ * @param user
+ */
+function showBox(type, user) {
+    hideAll();
+    var btn = type ? "添加" : "编辑";
+    $("input[type=submit]").val(btn);
+    $("#edit").show();
+    initEditBox(user)
+}
+
+/**
+ * 后退监听
+ */
+window.addEventListener("popstate", function () {
+    console.log(11)
+    if (sessionStorage.getItem("reload")){
+        sessionStorage.removeItem("reload");
+        window.location.reload();
+    }else {
+        showJiapu()
+    }
+});
+
+/**
+ * 编辑成员
+ * @param user
+ * @param parent
+ */
+function editSomeOne(user, parent) {
+    if (user) {
+        history.pushState("", document.title, "#edit")
+        showBox(false, user)
+        initUserInfo(user.data)
+        submitBtnClick("/api/pedigreePerson/edit", parent, user.data.pedigreePersonId, false);
+    }
+}
+
+/**
+ * 表单提交
+ * @param api
+ * @param parent
+ * @param own
+ * @param type
+ * @param direct
+ */
+function submitBtnClick(api, parent, own, type,direct) {
+    $("input").removeAttr("disabled");
+    $(".mui-bar").show();
+    $("#submit").click(function () {
+        mui(this).button('loading');
+        setTimeout(function() {
+            mui(this).button('reset');
+        }.bind(this), 2000);
+        var info = {};
+        var inputs = $("input[type=text]");
+        for (var i = 0; i < inputs.length; i++) {
+            var name = $(inputs[i]).attr("name");
+            if (name) {
+                info[name] = $(inputs[i]).val();
+            }
+        }
+        var inputs = $("input[type=radio]:checked");
+        for (var i = 0; i < inputs.length; i++) {
+            var name = $(inputs[i]).attr("name");
+            info[name] = $(inputs[i]).val();
+        }
+        delete info.addr;
+        delete info.spouseAddr;
+        if (info.birthDay) {
+            info.birthDay = new Date(info.birthDay).getTime();
+        }
+        if (info.spouseBirthDay) {
+            info.spouseBirthDay = new Date(info.spouseBirthDay).getTime();
+        }
+        /*添加或编辑*/
+        if (type) {
+            info.chouseId = own;
+            info.createType = direct
+        } else {
+            info.pedigreePersonId = own;
+        }
+        info.pedigreeId = pedigreeId;
+        postDataToServer(api, JSON.stringify(info), function (res) {
+            if (res.code == "SUCCESS") {
+                mui.alert("保存成功");
+                sessionStorage.setItem("reload","reload")
+                history.back();
+            } else if(res.code == "PleaseLogin") {
+                location.href = "login.html"
+            }else {
+                mui.alert(res.message)
+            }
+            console.log(res)
+        }, function (error) {
+            console.log(error)
+        });
+    })
+}
+
+/**
+ * 上传文件
+ * @param img
+ * @param file
+ * @param form
+ */
+function upload(img, file, form) {
+    img.unbind()
+    img.click(function () {
+        file.click()
+    });
+    file.unbind("change")
+    file.change(function () {
+        var fileSize = $(this)[0].files[0].size;
+        console.log(fileSize)
+        var path = $(this).val();
+        var jiapuImg = new FormData(form[0]);
+        jiapuImg.set("fileSize", fileSize);
+        $.ajax({
+            type: "POST",
+            url: urlBase + "/file/fileUpload",
+            data: jiapuImg, //FormId
+            processData: false, // 告诉jQuery不要去处理发送的数据
+            contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+            error: function (request) {
+                //layer.mui.alert('添加出现异常', {icon: 5});
+            },
+            success: function (data) {
+                if (data.code == 'SUCCESS') {
+                    var imgSrc = imgBase + data.result.path+"_crop_28x28";
+                    img.attr("src", imgSrc);
+                    img.next().val(data.result.path);
+                    file.val('')
+                    console.log(img.next())
+                } else {
+                    console.log(data.message);
+                }
+            }
+        });
+    })
+}
+$("input[name=sex]").change(function () {
+    var checked = this.value;
+    console.log(checked)
+    if(checked == "男"){
+       $(".spouse").html("媳妇");
+   }else {
+       $(".spouse").html("婿");
+   }
+});
+$("input[name=survivalMode]").change(function () {
+    var checked = this.value;
+    console.log(checked)
+    if (checked == "活"){
+        $(".survivalMode").html("现居地")
+    }else {
+        $(".survivalMode").html("墓地")
+    }
+});
+$("input[name=spouseSurvivalMode]").change(function () {
+    var checked = this.value;
+    console.log(checked)
+    if (checked == "活"){
+        $(".spouseSurvivalMode").html("现居地")
+    }else {
+        $(".spouseSurvivalMode").html("墓地")
+    }
+});
+
 var cityPicker2, cityPicker3, dtpicker, dtpicker2;

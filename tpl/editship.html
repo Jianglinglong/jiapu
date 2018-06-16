@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../css/main.css?version=2.3"/>
     <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
     <link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css?version=2.3">
-    <link rel="stylesheet" type="text/css" href="../css/editship.css?version=2.3"/>
+    <link rel="stylesheet" type="text/css" href="../css/editship.css?version=2.4"/>
 </head>
 <body>
 <div  class="pushu">
@@ -71,8 +71,8 @@
     <div class="mui-content">
         <div style="padding: 10px 10px;">
             <div id="segmentedControl" class="mui-segmented-control">
-                <a class="mui-control-item mui-active" href="#item1">自己</a>
-                <a class="mui-control-item" href="#item2">配偶</a>
+                <a class="zuren mui-control-item mui-active" href="#item1">族人</a>
+                <a class="spouse mui-control-item" href="#item2">媳妇</a>
             </div>
         </div>
         <div class="mui-control-content mui-active" id="item1">
@@ -108,7 +108,7 @@
                     <div class="mui-input-row">
                         <label class="mui-h4">状态</label>
                         <div class="mui-input-row mui-radio">
-                            <label class="mui-h4">活</label>
+                            <label class="mui-h4">生者</label>
                             <input form="info-form" name="survivalMode" type="radio" value="活">
                         </div>
                         <div class="mui-input-row mui-radio">
@@ -126,7 +126,7 @@
                 </li>
                 <li class="mui-table-view-cell mui-media">
                     <div class="mui-input-row">
-                        <label class="mui-h4">纪念馆号</label>
+                        <label class="mui-h4 ">纪念馆</label>
                         <input form="info-form" type="text" name="memorialId" maxlength="11" minlength="11"
                                placeholder="纪念馆号" class="surname mui-input-clear">
                     </div>
@@ -140,7 +140,7 @@
                 </li>
                 <li class="mui-table-view-cell mui-media">
                     <div class="mui-input-row">
-                        <label class="mui-h4">现居地</label>
+                        <label class="mui-h4 survivalMode">现居地</label>
                         <input id="cityResult2" readonly="readonly" type="text" placeholder="现居地">
                         <input form="info-form" readonly="readonly" hidden="hidden" name="xjProvince" type="text">
                         <input form="info-form" readonly="readonly" hidden="hidden" name="xjCity" type="text">
@@ -189,7 +189,7 @@
                 </li>
                 <li class="mui-table-view-cell mui-media">
                     <div class="mui-input-row">
-                        <label class="mui-h4">纪念馆号</label>
+                        <label class="mui-h4">纪念馆</label>
                         <input form="info-form" type="text" name="spouseMemorialId" maxlength="11" minlength="11"
                                placeholder="配偶的纪念馆号" class="surname mui-input-clear">
                     </div>
@@ -204,7 +204,7 @@
                 </li>
                 <li class="mui-table-view-cell mui-media">
                     <div class="mui-input-row">
-                        <label class="mui-h4">现居地</label>
+                        <label class="mui-h4 spouseSurvivalMode">现居地</label>
                         <input form="info-form" id="cityResult3" readonly="readonly" type="text" placeholder="配偶现居地">
                         <input form="info-form" readonly="readonly" hidden="hidden" name="spouseXjProvince" type="text">
                         <input form="info-form" readonly="readonly" hidden="hidden" name="spouseXjCity" type="text">
@@ -228,6 +228,7 @@
         <input type="hidden" name="path" value="jiapu"/>
         <input type="hidden" name="fileFormat" value="img"/>
     </form>
+    <div style="height: 50px"></div>
     <nav class="mui-bar mui-bar-tab">
         <button id="submit" style="width: 100%;height: 100%;" type="button"
                 data-loading-icon="mui-spinner mui-spinner-custom" class="mui-btn mui-btn-primary">确认
@@ -269,8 +270,8 @@
             </li>
             <li class="mui-table-view-cell mui-media">
                 <div class="mui-input-row">
-                    <label class="mui-h4 mui-text-right">纪念馆号</label>
-                    <label class="mui-h4 info-memorialId">纪念馆号</label>
+                    <label class="mui-h4 mui-text-right">纪念馆</label>
+                    <label class="mui-h4 info-memorialId">纪念馆</label>
                 </div>
             </li>
             <li class="mui-table-view-cell mui-media">
@@ -300,7 +301,7 @@
 <script type="text/javascript" charset="utf-8" src="../js/mui.picker.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="../js/city.data-3.js"></script>
 <script type="text/javascript" charset="utf-8" src="../js/request.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/ship/addOrEdit.js?version=2.3"></script>
+<script type="text/javascript" charset="utf-8" src="../js/ship/addOrEdit.js?version=2.4"></script>
 <script type="text/javascript" charset="utf-8" src="../js/ship/loadJiapuData.js?version=2.3"></script>
 <script type="text/javascript" charset="utf-8" src="../js/ship/genealogy-detail.js?version=2.3"></script>
 <script src="../js/weixinShare.js" type="text/javascript" charset="utf-8"></script>
