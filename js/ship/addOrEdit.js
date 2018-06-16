@@ -415,9 +415,11 @@ $("input[name=survivalMode]").change(function () {
     console.log(checked)
     if (checked == "活"){
         $(".survivalMode").html("现居地");
+        $("#cityResult2").attr("placeholder","现居地");
         $(".phone").show();
     }else {
-        $(".survivalMode").html("墓地")
+        $("#cityResult2").attr("placeholder","墓地");
+        $(".survivalMode").html("墓地");
         $(".phone").hide();
     }
 });
@@ -425,10 +427,12 @@ $("input[name=spouseSurvivalMode]").change(function () {
     var checked = this.value;
     console.log(checked)
     if (checked == "活"){
-        $(".spouseSurvivalMode").html("现居地")
+        $(".spouseSurvivalMode").html("现居地");
+        $("#cityResult3").attr("placeholder","现居地");
         $(".spousePhone").show();
     }else {
-        $(".spouseSurvivalMode").html("墓地")
+        $(".spouseSurvivalMode").html("墓地");
+        $("#cityResult3").attr("placeholder","墓地");
         $(".spousePhone").hide();
     }
 });

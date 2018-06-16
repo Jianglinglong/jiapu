@@ -90,3 +90,6 @@
  .mui-switch:before{content: "否"}
   .mui-radio label{width: 90px;padding-right: 0}
   .mui-radio input[type=radio]{width: 10px}
+ [readonly="readonly"] {
+     user-select: none;
+ }
