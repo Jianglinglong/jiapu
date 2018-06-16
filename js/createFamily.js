@@ -15,6 +15,7 @@ ajax({
             }
             $("#cityResult3").val(res.result.province + " "+res.result.city + " " +res.result.county);
             $("#jiapu-tt-img").attr("src",imgBase+ res.result.totem);
+            $("#textarea").html(res.result.ancestralHall)
         }
     }
 });

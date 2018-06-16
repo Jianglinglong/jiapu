@@ -17,7 +17,7 @@
     <script src="../js/mui.picker.js?version=2.3"></script>
     <script src="../js/mui.poppicker.js?version=2.3"></script>
     <script src="../js/request.js" type="text/javascript" charset="utf-8"></script>
-    <script src="../js/createFamily.js?version=2.3" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/createFamily.js?version=2.4" type="text/javascript" charset="utf-8"></script>
     <!--<script src="../js/weixinShare.js" type="text/javascript" charset="utf-8"></script>-->
 </head>
 
@@ -57,7 +57,7 @@
         <div class="mui-input-row">
             <label class="mui-h4">图腾</label>
             <form id="totem" class="mui-table-view-cell">
-                <img class="totem" src="../img/demo.jpg" alt="" width="34" height="34" id="jiapu-tt-img">
+                <img class="totem" onerror="this.src='../img/demo.jpg'" src="../img/demo.jpg" alt="" width="34" height="34" id="jiapu-tt-img">
                 <input id="jiapu-tt-file" name="fileName" hidden type="file">
                 <input type="hidden" name="path" value="jiapu"/>
                 <input type="hidden" name="fileFormat" value="img"/>
@@ -78,7 +78,7 @@
         </div>
         <div class="mui-input-row">
             <label class="mui-h4">祠堂</label>
-            <div id="textarea" contenteditable="true"></div>
+            <div id="textarea" contenteditable="true" style="-webkit-user-select: auto"></div>
            <span class=" mui-icon mui-icon-plusempty"></span>
             <form id="citang" class="mui-table-view-cell">
                 <input id="jiapu-tt-citang" name="fileName" hidden type="file" accept="image/*">

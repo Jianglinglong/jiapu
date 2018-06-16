@@ -130,6 +130,7 @@ $(function () {
                 $(".addr").val(res.result.province + " "+res.result.city + " " +res.result.county);
                 $("#jiapu-tt-img").attr("src",imgBase+ res.result.totem);
                 $("#ship input").attr("readonly","readonly");
+                $("#textarea").html(res.result.ancestralHall)
                 if (user.userId !=res.result.userId){
                     $("#editShip").remove();
                 }
