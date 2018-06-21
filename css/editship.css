@@ -32,10 +32,7 @@
      text-align: center;
  }
 
- .image label {
-     text-align: left;
- }
- .image label~input {}
+ /*.image label~input {}*/
 
  .image label~input {
      width: 42px;
@@ -49,6 +46,7 @@
 
  .mui-table-view .mui-media-object {
      width: 42px;
+     float: left;
  }
 
  .fz-12 {
@@ -88,7 +86,8 @@
  #ship .mui-content{width: 80%;margin: 0 auto}
  .mui-switch.mui-active:before{content: "是"}
  .mui-switch:before{content: "否"}
-  .mui-radio label{width: 90px;padding-right: 0}
+ .mui-input-row label{text-align: right}
+  .mui-radio label{width: 90px;padding-right: 0;text-align: left}
   .mui-radio input[type=radio]{width: 10px}
  [readonly="readonly"] {
      user-select: none;

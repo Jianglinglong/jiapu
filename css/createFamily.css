@@ -67,3 +67,4 @@ img{  vertical-align: middle;}
      box-shadow: none;
      -webkit-backface-visibility: hidden;
 }
+#bigImg img{vertical-align: middle;width: 100%;}

@@ -22,6 +22,9 @@
 </head>
 
 <body class="mui-ios mui-ios-11 mui-ios-11-0">
+<div id="bigImg" style="position: fixed; width: 100vw; height: 100vh; background: rgb(0, 0, 0); justify-content: center; align-items: center; z-index: 12; display: none;">
+    <img src="http://oydc1lvkk.bkt.clouddn.com/FjeIcMDof_zf6Eqjf5e62ufFbX42">
+</div>
 <div class="mui-content">
     <div class="mui-table-view">
         <input type="hidden" class="pedigreeId ">
@@ -41,12 +44,9 @@
         </div>
         <div class="mui-input-row">
             <label class="mui-h4">谱书</label>
-            <form>
-                <input type="hidden" name="path" value="jiapu"/>
-                <input type="hidden" name="fileFormat" value="doc"/>
-                <input type="file" name="fileName" accept="application/msword,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-            </form>
-            <input type="text" placeholder="上传谱书(doc,docx,pdf)" id="musicBook" readonly class="musicBook mui-input-clear">
+            <input type="text" style=" width: 37%;float: left;" placeholder="上传谱书(doc,docx,pdf)" readonly class="musicBookText">
+            <input type="hidden" readonly class="musicBook">
+            <button  id="musicBook" style="padding: 9px; ">上传谱书</button>
         </div>
         <div class="mui-input-row">
             <label class="mui-h4" style="line-height: 68px;">图腾</label>
@@ -98,6 +98,11 @@
             </nav>
         <!--<input type="submit" value="创建家谱" id="create" style="margin-top: 0.5rem;">-->
     </div>
+    <form name="musicBook">
+        <input type="hidden" name="path" value="jiapu"/>
+        <input type="hidden" name="fileFormat" value="doc"/>
+        <input type="file" name="fileName" accept="application/msword,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+    </form>
 </div>
 </body>
 

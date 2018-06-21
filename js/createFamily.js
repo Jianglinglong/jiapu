@@ -13,9 +13,13 @@ ajax({
             if (res.result.flagPwd){
                 $(".flagPwd").addClass("mui-active");
             }
+            if (res.result.musicBook) {
+                $(".musicBookText").val("已上传")
+            }
             $("#cityResult3").val(res.result.province + " "+res.result.city + " " +res.result.county);
             $("#jiapu-tt-img").attr("src",imgBase+ res.result.totem+'_crop_68x68');
-            $("#textarea").html(res.result.ancestralHall)
+            $("#textarea").html(res.result.ancestralHall);
+            initShowBigImg()
         }
     }
 });
@@ -28,7 +32,7 @@ $(function () {
     var imgBase = 'http://img.yunji128.com/';
 
     $("#musicBook").on("tap",function () {
-        var file  = $(this).prev().children("input[type=file]");
+        var file  = $("form[name=musicBook]").children("input[type=file]");
         file.click();
         file.unbind();
         file.change(function () {
@@ -47,6 +51,8 @@ $(function () {
                 success: function (data) {
                     if (data.code == 'SUCCESS') {
                         $("#musicBook").val( imgBase + data.result.path);
+                        $(".musicBookText").val("已上传");
+                        mui.alert("上传成功");
                         file.val('');
                     } else {
                         console.log(data.message);
@@ -177,6 +183,7 @@ var accessPwd = true;
                 if (data.code == 'SUCCESS') {
                     $("#textarea").append('<img src="'+imgBase + data.result.path+'_crop_41x41'+'" alt="">' );
                     $("#jiapu-tt-citang").val('');
+                    initShowBigImg();
                 } else {
                     console.log(data.message);
                 }
@@ -184,4 +191,19 @@ var accessPwd = true;
         });
     });
 });
+function initShowBigImg() {
+    $("#textarea img").click(function () {
+        showBigImg($(this));
+    });
+}
+function showBigImg(img) {
+    console.log(img)
+    $("#bigImg img").attr("src",img.attr("src").split("_")[0]);
+    $("#bigImg").css("display","flex");
+    $("#bigImg").click(function () {
+        console.log("sss")
+        $(this).css("display","none");
+    });
+}
+
 
