@@ -14,7 +14,7 @@ ajax({
                 $(".flagPwd").addClass("mui-active");
             }
             $("#cityResult3").val(res.result.province + " "+res.result.city + " " +res.result.county);
-            $("#jiapu-tt-img").attr("src",imgBase+ res.result.totem);
+            $("#jiapu-tt-img").attr("src",imgBase+ res.result.totem+'_crop_68x68');
             $("#textarea").html(res.result.ancestralHall)
         }
     }

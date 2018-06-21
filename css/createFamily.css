@@ -60,3 +60,10 @@ input[type="file"] {
 img{  vertical-align: middle;}
 .mui-switch.mui-active:before{content: "是"}
 .mui-switch:before{content: "否"}
+
+.mui-bar{
+    background-color: #FFFFFF;
+     -webkit-box-shadow: none;
+     box-shadow: none;
+     -webkit-backface-visibility: hidden;
+}
