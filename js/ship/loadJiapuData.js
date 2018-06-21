@@ -135,6 +135,7 @@ $(function () {
                     $("#editShip").remove();
                 }
                 $("#download").attr("rel",res.result.musicBook);
+                initShowBigImg()
             }
         }
     })
@@ -206,5 +207,18 @@ function checkPwd(pwd, id) {
         },
         error: function (message) {
         }
+    });
+}
+function initShowBigImg() {
+    $("#textarea img").click(function () {
+        showBigImg($(this));
+    });
+}
+function showBigImg(img) {
+    $("#bigImg img").attr("src",img.attr("src").split("_")[0]);
+    $("#bigImg").css("display","flex");
+    $("#bigImg").unbind();
+    $("#bigImg").click(function () {
+        $(this).css("display","none");
     });
 }

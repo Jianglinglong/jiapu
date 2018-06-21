@@ -21,6 +21,7 @@ function addSomme(user, parent,direct) {
     $("input[name=sex]:checked").change();
     $("input[name=survivalMode]:checked").change();
     $("input[name=spouseSurvivalMode]:checked").change();
+    $("#header-edit .mui-title").html("添加族人")
     submitBtnClick("/api/pedigreePerson/add", parent, user.id, true,direct);
 }
 
@@ -292,6 +293,7 @@ window.addEventListener("popstate", function () {
  */
 function editSomeOne(user, parent) {
     if (user) {
+        $("#header-edit .mui-title").html("编辑族人")
         $(".mui-control-content").removeClass("mui-active").eq(0).addClass("mui-active");
         $(".zuren").addClass("mui-active");
         $(".spouse ").removeClass("mui-active");

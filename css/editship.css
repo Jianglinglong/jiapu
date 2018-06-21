@@ -92,3 +92,4 @@
  [readonly="readonly"] {
      user-select: none;
  }
+ .mui-content>.mui-table-view:first-child{margin-top:0}

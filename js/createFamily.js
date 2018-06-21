@@ -197,11 +197,10 @@ function initShowBigImg() {
     });
 }
 function showBigImg(img) {
-    console.log(img)
     $("#bigImg img").attr("src",img.attr("src").split("_")[0]);
     $("#bigImg").css("display","flex");
+    $("#bigImg").unbind();
     $("#bigImg").click(function () {
-        console.log("sss")
         $(this).css("display","none");
     });
 }

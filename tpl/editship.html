@@ -4,25 +4,37 @@
 <head>
     <meta charset="utf-8"/>
     <title>编辑家谱</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=2,user-scalable=no"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=2,user-scalable=no"/>
     <link rel="stylesheet" type="text/css" href="../css/main.css?version=3.0"/>
     <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
     <link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css?version=3.0">
-    <link rel="stylesheet" type="text/css" href="../css/editship.css?version=3.0"/>
+    <link rel="stylesheet" type="text/css" href="../css/editship.css?version=3.1"/>
+    <style>
+        img {
+            vertical-align: middle;
+        }
+
+        .mui-switch.mui-disabled {
+            opacity: 1
+        }</style>
 </head>
 <body>
-<div  class="pushu">
-    <button id="download">下载谱书</button>
-    <button id="showShip">查看家谱</button>
-    <button id="editShip" onclick="location.href='chuangjianjiapu.html'">编辑家谱</button>
+<div id="bigImg"
+     style="position: fixed; width: 100vw; height: 100vh; background: rgb(0, 0, 0); justify-content: center; align-items: center; z-index: 12; display: none;">
+    <img src="http://oydc1lvkk.bkt.clouddn.com/FjeIcMDof_zf6Eqjf5e62ufFbX42">
 </div>
-<div id="ship">
-    <div >
-    <div class="mui-segmented-control">
-        <a class="mui-control-item mui-active">查看家谱</a>
+<div class="mui-content">
+    <div class="pushu">
+        <button id="download">下载谱书</button>
+        <button id="showShip">查看家谱</button>
+        <button id="editShip" onclick="location.href='chuangjianjiapu.html'">编辑家谱</button>
     </div>
-</div>
-    <div class="mui-content">
+    <div id="ship">
+        <header id="header" class="mui-bar mui-bar-nav">
+            <h1 class="mui-title">查看谱书</h1>
+            <a class="mui-icon mui-icon-left-nav mui-pull-left" href="javascript:history.back();"></a>
+        </header>
         <div class="mui-table-view">
             <div class="mui-input-row">
                 <label class="mui-h4">姓氏</label>
@@ -34,38 +46,43 @@
             </div>
             <div class="mui-input-row">
                 <label class="mui-h4">字辈</label>
-                <input type="text"  class="gen">
+                <input type="text" class="gen">
             </div>
             <div class="mui-input-row">
                 <label class="mui-h4">图腾</label>
-                <img class="totem" onerror="this.src='../img/demo.jpg'" src="../img/demo.jpg" alt="" width="64" height="64" id="jiapu-tt-img">
+                <img class="totem" onerror="this.src='../img/demo.jpg'" src="../img/demo.jpg" alt="" width="64"
+                     height="64" id="jiapu-tt-img">
             </div>
             <div class="mui-input-row">
                 <label class="mui-h4">祖训</label>
-                <input type="text"  class=" zuxun">
+                <input type="text" class=" zuxun">
             </div>
             <div class="mui-input-row">
                 <label class="mui-h4">堂号</label>
-                <input type="text"  class=" church">
+                <input type="text" class=" church">
             </div>
             <div class="mui-input-row">
                 <label class="mui-h4">家规</label>
                 <input type="text" class="houseRules ">
             </div>
-            <div class="mui-input-row">
-                <div id="textarea" style="position: relative;left: 35%;width: 65%;"></div>
-                <label class="mui-h4" style="position: absolute;left: 15px;top: 0">祠堂</label>
-            </div>
             <li class="mui-table-view-cell">
-                <span  class="mui-h4">是否需要密码</span>
+                <span class="mui-h4">是否需要密码</span>
                 <div class="mui-disabled mui-switch mui-switch-blue">
                     <div class="mui-switch-handle"></div>
                 </div>
             </li>
+            <div class="mui-input-row" style="min-height: 41px;">
+                <label class="mui-h4" style="position: absolute;width: 35%;">祠堂</label>
+                <div id="textarea" style="position: relative;left: 35%;width: 65%;padding-top: 11px"></div>
+            </div>
         </div>
     </div>
 </div>
 <div id="edit">
+    <header id="header-edit" class="mui-bar mui-bar-nav">
+        <h1 class="mui-title">人物信息</h1>
+        <a class="mui-icon mui-icon-left-nav mui-pull-left" href="javascript:history.back();"></a>
+    </header>
     <div class="mui-content">
         <div style="padding: 10px 10px;">
             <div id="segmentedControl" class="mui-segmented-control">
@@ -234,6 +251,10 @@
     </nav>
 </div>
 <div id="info" class="info">
+    <header id="header-info" class="mui-bar mui-bar-nav">
+        <h1 class="mui-title">人物信息</h1>
+        <a class="mui-icon mui-icon-left-nav mui-pull-left" href="javascript:history.back();"></a>
+    </header>
     <div class="mui-content">
         <ul class="mui-table-view mui-content">
             <li class="mui-table-view-cell mui-media image">
@@ -293,15 +314,14 @@
         <canvas class="show-genealogy-canvas"></canvas>
     </div>
 </div>
-<script type="text/javascript" charset="utf-8" src="../js/mui.js?version=3.0"></script>
-<script type="text/javascript" charset="utf-8" src="../js/ship/jquery.min.js?version=3.0"></script>
-<script type="text/javascript" charset="utf-8" src="../js/ship/wy.js?version=3.0"></script>
-<script type="text/javascript" charset="utf-8" src="../js/mui.min.js?version=3.0"></script>
+<script type="text/javascript" charset="utf-8" src="../js/ship/jquery.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/ship/wy.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/mui.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="../js/mui.picker.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="../js/city.data-3.js"></script>
 <script type="text/javascript" charset="utf-8" src="../js/request.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/ship/addOrEdit.js?version=3.0"></script>
-<script type="text/javascript" charset="utf-8" src="../js/ship/loadJiapuData.js?version=3.0"></script>
+<script type="text/javascript" charset="utf-8" src="../js/ship/addOrEdit.js?version=3.1"></script>
+<script type="text/javascript" charset="utf-8" src="../js/ship/loadJiapuData.js?version=3.1"></script>
 <script type="text/javascript" charset="utf-8" src="../js/ship/genealogy-detail.js?version=3.0"></script>
 <script src="../js/weixinShare.js" type="text/javascript" charset="utf-8"></script>
 </body>
