@@ -104,6 +104,8 @@ function hideAll() {
     $("#info").hide();
     $("#ship").hide();
     $(".show-canvas-content").hide();
+    $("#bigOrSmall").hide();
+    $(".pushu").hide();
 }
 
 /**
@@ -245,6 +247,8 @@ $("#download").click(function () {
 function showJiapu() {
     $("#submit").unbind();
     hideAll();
+    $("#bigOrSmall").show();
+    $(".pushu").show();
     $(".show-canvas-content").show();
     if (dtpicker && dtpicker.picker) {
         dtpicker.dispose();
