@@ -6,6 +6,12 @@ $(function () {
     }
     if (user) {
         user = JSON.parse(user);
+        if(user.birthDay){
+            user.birthDay = user.birthDay.substr(0,10);
+        }
+        if (user.spouseBirthDay){
+            user.spouseBirthDay = user.spouseBirthDay.substr(0,10);
+        }
         for (var item in user) {
             var input = $("input[name=" + item + "]")
             var type = input.attr("type");
@@ -20,11 +26,6 @@ $(function () {
         }
         $("input[name=addr]").val(user.xjProvince + " " + user.xjCity + " " + user.xjCounty);
         $("input[name=spouseAddr]").val(user.spouseXjProvince + " " + user.spouseXjCity + " " + user.spouseXjCounty);
-        // var headImgUrl = imgBase + user.headImg;
-        // $("input[name=headImg]").prev().attr("src", headImgUrl);
-        // $("input[name=headImg]").val(user.headImg)
-        // $("input[name=spouseHeadImg]").prev().attr("src",imgBase +  user.spouseHeadImg);
-        // $("input[name=sex][value=" + user.sex + "]").prop("checked", "checked");
     }
     $("input[type=submit]").click(function () {
         var data = $("#info-form").serializeArray();

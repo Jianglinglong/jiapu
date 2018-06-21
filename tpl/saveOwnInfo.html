@@ -20,20 +20,10 @@
             width: auto;
         }
 
-        .mui-checkbox,
         .mui-radio {
             display: inline-block;
         }
 
-        .image {
-            text-align: center;
-        }
-
-        .image label {
-            text-align: left;
-        }
-
-        ;
         .image label ~ input {
         }
 
@@ -42,6 +32,9 @@
             height: 42px;
             float: none;
         }
+        .mui-input-row label {
+             text-align: right;
+         }
     </style>
 
 <script src="../js/weixinShare.js" type="text/javascript" charset="utf-8"></script></head>
@@ -103,8 +96,8 @@
         </li>
         <li class="mui-table-view-cell mui-media">
             <div class="mui-input-row">
-                <label class="mui-h4">现居地</label>
-                <input form="info-form" id="cityResult2" readonly="readonly" name="addr" type="text" placeholder="现居地">
+                <label class="mui-h4">居住地</label>
+                <input form="info-form" id="cityResult2" readonly="readonly" name="addr" type="text" placeholder="居住地">
                 <button id="showCityPicker2" class="mui-btn mui-btn-block" type="button"
                         style="display: none;"></button>
             </div>
@@ -145,9 +138,9 @@
         </li>
         <li class="mui-table-view-cell mui-media">
             <div class="mui-input-row">
-                <label class="mui-h4">现居地</label>
+                <label class="mui-h4">居住地</label>
                 <input form="info-form" id="cityResult3" readonly="readonly" name="spouseAddr" type="text"
-                       placeholder="配偶现居地">
+                       placeholder="配偶居住地">
                 <button id="showCityPicker3" class="mui-btn mui-btn-block" type="button" style="display: none;">三级联动示例
                     ...
                 </button>

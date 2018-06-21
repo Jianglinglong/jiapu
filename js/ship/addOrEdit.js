@@ -37,13 +37,13 @@ function showSomeOne(user,index) {
             $(".info-headImg").attr("src",imgBase+ user.headImg + '_crop_172x172');
             $(".info-name").html(user.name);
             $(".info-sex").html(user.sex);
-            $(".info-birthDay").html(user.birthDay);
+            $(".info-birthDay").html(user.birthDay ? user.birthDay.substr(0,10):'');
             $(".info-memorialId").html(user.memorialId);
             $(".info-phone").html(user.phone);
             $(".info-survivalMode").html(user.survivalMode);
             $(".info-addr").html(user.xjProvince +" " +user.xjCity + " " + user.xjCounty);
             if(user.survivalMode == "活"){
-                $(".info-addr-title").html("现居地");
+                $(".info-addr-title").html("居住地");
                 $(".info-phone-item").show();
             }else{
                 $(".info-addr-title").html("墓地");
@@ -59,13 +59,13 @@ function showSomeOne(user,index) {
             $(".info-headImg").attr("src",imgBase+ user.spouseHeadImg + '_crop_172x172');
             $(".info-name").html(user.spouseName);
             $(".info-sex").html(user.sex=="男"?"女":"男");
-            $(".info-birthDay").html(user.spouseBirthDay);
+            $(".info-birthDay").html(user.spouseBirthDay ? user.spouseBirthDay.substr(0,10):'');
             $(".info-memorialId").html(user.spouseMemorialId);
             $(".info-phone").html(user.spousePhone);
             $(".info-survivalMode").html(user.spouseSurvivalMode);
             $(".info-addr").html(user.spouseXjProvince +" " +user.spouseXjCity + " " + user.spouseXjCounty);
             if(user.spouseSurvivalMode == "活"){
-                $(".info-addr-title").html("现居地");
+                $(".info-addr-title").html("居住地");
                 $(".info-phone-item").show();
             }else{
                 $(".info-addr-title").html("墓地");
@@ -115,7 +115,11 @@ function initUserInfo(user) {
         var input = $("input[name=" + item + "]")
         var type = input.attr("type");
         if (type == "text") {
-            $("input[name=" + item + "]").val(user[item]);
+            if (item == 'birthDay' || item == 'spouseBirthDay') {
+                $("input[name=" + item + "]").val(user[item]?user[item].substr(0,10):'');
+            }else {
+                $("input[name=" + item + "]").val(user[item]);
+            }
         } else if (type == "radio") {
             $("input[name=" + item + "][value='" + user[item] + "']").prop("checked", "checked");
         }
@@ -414,8 +418,8 @@ $("input[name=survivalMode]").change(function () {
     var checked = this.value;
     console.log(checked)
     if (checked == "活"){
-        $(".survivalMode").html("现居地");
-        $("#cityResult2").attr("placeholder","现居地");
+        $(".survivalMode").html("居住地");
+        $("#cityResult2").attr("placeholder","居住地");
         $(".phone").show();
     }else {
         $("#cityResult2").attr("placeholder","墓地");
@@ -427,8 +431,8 @@ $("input[name=spouseSurvivalMode]").change(function () {
     var checked = this.value;
     console.log(checked)
     if (checked == "活"){
-        $(".spouseSurvivalMode").html("现居地");
-        $("#cityResult3").attr("placeholder","现居地");
+        $(".spouseSurvivalMode").html("居住地");
+        $("#cityResult3").attr("placeholder","居住地");
         $(".spousePhone").show();
     }else {
         $(".spouseSurvivalMode").html("墓地");

@@ -34,11 +34,7 @@ html,
 .mui-table-view::after {
     background: #fff;
 }
-
-input[type=submit] {
-    width: 10rem;
-}
-
+.mui-bar .mui-btn{top: 0}
 .mui-input-row label~input,
 .mui-input-row label~textarea {
     border: 1px solid rgba(0, 0, 0, .2);
