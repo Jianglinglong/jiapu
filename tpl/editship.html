@@ -4,8 +4,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>编辑家谱</title>
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=2,user-scalable=no"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=2,user-scalable=no"/>
     <link rel="stylesheet" type="text/css" href="../css/main.css?version=3.0"/>
     <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
     <link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css?version=3.0">
@@ -309,11 +308,19 @@
         </ul>
     </div>
 </div>
-<div class="show-canvas-content back-white">
+<div class="show-canvas-content back-white" style="zoom: 100%">
     <div class="position-relative move">
         <canvas class="show-genealogy-canvas"></canvas>
     </div>
 </div>
+<nav style="position: fixed;bottom: 0;z-index: 999;width: 100%">
+    <div class="mui-input-row mui-input-range" style="padding: 0">
+        <input type="range" id="block-range" value="100" min="50" max="100" data-input-slider="4">
+        <span class="mui-tooltip mui-hidden" style="left: 264.44px;">92</span>
+    </div>
+    <!--<button class="small">缩小</button>-->
+    <!--<button class="big">放大</button>-->
+</nav>
 <script type="text/javascript" charset="utf-8" src="../js/ship/jquery.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="../js/ship/wy.js"></script>
 <script type="text/javascript" charset="utf-8" src="../js/mui.min.js"></script>
@@ -324,6 +331,16 @@
 <script type="text/javascript" charset="utf-8" src="../js/ship/loadJiapuData.js?version=3.1"></script>
 <script type="text/javascript" charset="utf-8" src="../js/ship/genealogy-detail.js?version=3.0"></script>
 <script src="../js/weixinShare.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    $('input[type="range"]').bind('input',function(){
+        var value = this.value;
+        $(".show-canvas-content").css("zoom",value+"%");
+        var height = $(window).height();
+        height= height+ height*(100-value)/100;
+        $(".show-canvas-content").height(height + $(window).height()/2);
+        console.log(height)
+    });
+</script>
 </body>
 
 </html>
