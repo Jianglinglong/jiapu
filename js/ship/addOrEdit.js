@@ -42,6 +42,7 @@ function showSomeOne(user,index) {
             $(".info-memorialId").html(user.memorialId);
             $(".info-phone").html(user.phone);
             $(".info-survivalMode").html(user.survivalMode);
+            $(".info-address").html(user.address);
             $(".info-addr").html(user.xjProvince +" " +user.xjCity + " " + user.xjCounty);
             if(user.survivalMode == "活"){
                 $(".info-addr-title").html("居住地");
@@ -50,6 +51,7 @@ function showSomeOne(user,index) {
                 $(".info-addr-title").html("墓地");
                 $(".info-phone-item").hide();
             }
+
            hideAll();
             $("#info").show();
         }else {
@@ -65,6 +67,7 @@ function showSomeOne(user,index) {
             $(".info-phone").html(user.spousePhone);
             $(".info-survivalMode").html(user.spouseSurvivalMode);
             $(".info-addr").html(user.spouseXjProvince +" " +user.spouseXjCity + " " + user.spouseXjCounty);
+            $(".info-address").html(user.spouseAddress);
             if(user.spouseSurvivalMode == "活"){
                 $(".info-addr-title").html("居住地");
                 $(".info-phone-item").show();
@@ -324,26 +327,10 @@ function submitBtnClick(api, parent, own, type,direct) {
         setTimeout(function() {
             mui(this).button('reset');
         }.bind(this), 2000);
+        var data = $("#info-form").serializeArray();
         var info = {};
-        var inputs = $("input[type=text]");
-        for (var i = 0; i < inputs.length; i++) {
-            var name = $(inputs[i]).attr("name");
-            if (name) {
-                info[name] = $(inputs[i]).val();
-            }
-        }
-        var inputs = $("input[type=radio]:checked");
-        for (var i = 0; i < inputs.length; i++) {
-            var name = $(inputs[i]).attr("name");
-            info[name] = $(inputs[i]).val();
-        }
-        delete info.addr;
-        delete info.spouseAddr;
-        if (info.birthDay) {
-            info.birthDay = new Date(info.birthDay).getTime();
-        }
-        if (info.spouseBirthDay) {
-            info.spouseBirthDay = new Date(info.spouseBirthDay).getTime();
+        for (var item of data){
+            info[item.name] = item.value;
         }
         /*添加或编辑*/
         if (type) {

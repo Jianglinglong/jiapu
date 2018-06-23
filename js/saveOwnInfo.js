@@ -33,12 +33,6 @@ $(function () {
         for (var item of data){
             info[item.name] = item.value;
         }
-        if (info.birthDay) {
-            info.birthDay = new Date(info.birthDay).getTime();
-        }
-        if (info.spouseBirthDay) {
-            info.spouseBirthDay = new Date(info.spouseBirthDay).getTime();
-        }
         console.log(info)
         postDataToServer("/api/pedigree/myPedigreeUserInfoSave", JSON.stringify(info), function (res) {
             if (res.code == "SUCCESS") {

@@ -149,7 +149,7 @@
                     <div class="mui-input-row">
                         <label class="mui-h4">生日</label>
                         <input form="info-form" type="text" class="birth" id="myBirth" readonly="readonly"
-                               placeholder="选择生日" name="birthDay" class="surname mui-input-clear">
+                               placeholder="选择生日" name="birthDay">
                     </div>
                 </li>
                 <li class="mui-table-view-cell mui-media">
@@ -159,8 +159,12 @@
                         <input form="info-form" readonly="readonly" hidden="hidden" name="xjProvince" type="text">
                         <input form="info-form" readonly="readonly" hidden="hidden" name="xjCity" type="text">
                         <input form="info-form" readonly="readonly" hidden="hidden" name="xjCounty" type="text">
-                        <button id="showCityPicker2" class="mui-btn mui-btn-block" type="button"
-                                style="display: none;"></button>
+                    </div>
+                </li>
+                <li class="mui-table-view-cell mui-media">
+                    <div class="mui-input-row">
+                        <label class="mui-h4">详细地址</label>
+                        <input form="info-form" type="text" placeholder="详细地址"  name="address">
                     </div>
                 </li>
             </ul>
@@ -213,7 +217,7 @@
                         <label class="mui-h4">生日</label>
                         <input form="info-form" type="text" name="spouseBirthDay" class="birth" id="aBirth"
                                data-options="{}" readonly="readonly"
-                               placeholder="选择生日" class="surname mui-input-clear">
+                               placeholder="选择生日">
                     </div>
                 </li>
                 <li class="mui-table-view-cell mui-media">
@@ -223,8 +227,12 @@
                         <input form="info-form" readonly="readonly" hidden="hidden" name="spouseXjProvince" type="text">
                         <input form="info-form" readonly="readonly" hidden="hidden" name="spouseXjCity" type="text">
                         <input form="info-form" readonly="readonly" hidden="hidden" name="spouseXjCounty" type="text">
-                        <button id="showCityPicker3" class="mui-btn mui-btn-block" type="button"
-                                style="display: none;"></button>
+                    </div>
+                </li>
+                <li class="mui-table-view-cell mui-media">
+                    <div class="mui-input-row">
+                        <label class="mui-h4">详细地址</label>
+                        <input form="info-form" type="text" placeholder="详细地址" name="spouseAddress">
                     </div>
                 </li>
             </ul>
@@ -305,6 +313,12 @@
                     <label class="mui-h4 info-addr"></label>
                 </div>
             </li>
+            <li class="mui-table-view-cell mui-media">
+                <div class="mui-input-row">
+                    <label class="mui-h4">详细地址</label>
+                    <label class="mui-h4 info-address"></label>
+                </div>
+            </li>
         </ul>
     </div>
 </div>
@@ -327,7 +341,7 @@
 <script type="text/javascript" charset="utf-8" src="../js/mui.picker.min.js"></script>
 <script type="text/javascript" charset="utf-8" src="../js/city.data-3.js"></script>
 <script type="text/javascript" charset="utf-8" src="../js/request.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/ship/addOrEdit.js?version=3.2"></script>
+<script type="text/javascript" charset="utf-8" src="../js/ship/addOrEdit.js?version=3.3"></script>
 <script type="text/javascript" charset="utf-8" src="../js/ship/loadJiapuData.js?version=3.1"></script>
 <script type="text/javascript" charset="utf-8" src="../js/ship/genealogy-detail.js?version=3.0"></script>
 <script src="../js/weixinShare.js" type="text/javascript" charset="utf-8"></script>
