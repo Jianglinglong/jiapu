@@ -116,7 +116,7 @@
                     $("[name='realName']").val(data.result.realName);
                     $('input[name="gender"]:checked').val(data.result.gender);
                     $("[name='birthDay']").val(data.result.birthDay ? data.result.birthDay.substr(0,10):'' );
-                    $("[name='jxcity']").val(data.result.jxProvince+" "+data.result.jxCity+" "+data.result.xjCounty);
+                    $("[name='jxcity']").val(data.result.jxProvince+" "+data.result.jxCity+" "+data.result.jxCounty);
                     $("[name='xjcity']").val(data.result.xjProvince+" "+data.result.xjCity+" "+data.result.xjCounty);
                     $("[name='introduction']").val(data.result.introduction);
                 }

@@ -29,26 +29,10 @@ $(function () {
     }
     $("input[type=submit]").click(function () {
         var data = $("#info-form").serializeArray();
-        var addr = $("input[name=addr]").val().split(" ");
-        var spouseAddr = $("input[name=spouseAddr]").val().split(" ");
-        var info = {
-            "birthDay": $("input[name=birthDay]").val(),
-            "headImg": $("input[name=headImg]").val(),
-            "name": $("input[name=name]").val(),
-            "phone": $("input[name=phone]").val(),
-            "remark": $("input[name=birthDay]").val(),
-            "sex": $("input[name=sex]:checked").val(),
-            "spouseBirthDay": $("input[name=spouseBirthDay]").val(),
-            "spouseHeadImg": $("input[name=spouseHeadImg]").val(),
-            "spouseName": $("input[name=spouseName]").val(),
-            "spousePhone": $("input[name=spousePhone]").val(),
-            "spouseXjCity": spouseAddr[1],
-            "spouseXjCounty": spouseAddr[2],
-            "spouseXjProvince": spouseAddr[0],
-            "xjCity": addr[1],
-            "xjCounty": addr[2],
-            "xjProvince": addr[0]
-        };
+        var info = {};
+        for (var item of data){
+            info[item.name] = item.value;
+        }
         if (info.birthDay) {
             info.birthDay = new Date(info.birthDay).getTime();
         }
@@ -67,9 +51,7 @@ $(function () {
         }, function (error) {
             console.log(error)
         });
-    })
-
-
+    });
     function upload(img, file, form) {
         img.click(function () {
             file.click()
@@ -141,8 +123,10 @@ $(function () {
     var cityResult3 = $("#cityResult3");
     cityResult3.click(function () {
         cityPicker3.show(function (items) {
-            cityResult3.val(_getParam(items[0], 'text') + " " + _getParam(items[1], 'text') +
-                " " + _getParam(items[2], 'text'));
+            cityResult3.val(_getParam(items[0], 'text') + " " + _getParam(items[1], 'text') + " " + _getParam(items[2], 'text'));
+            $("input[name=spouseXjProvince]").val(items[0].text)
+            $("input[name=spouseXjCity]").val(items[1].text)
+            $("input[name=spouseXjCounty]").val(items[2].text)
         })
     })
     var cityPicker2 = new mui.PopPicker({
@@ -153,8 +137,10 @@ $(function () {
     var cityResult2 = $("#cityResult2");
     cityResult2.click(function () {
         cityPicker2.show(function (items) {
-            cityResult2.val(_getParam(items[0], 'text') + " " + _getParam(items[1], 'text') +
-                " " + _getParam(items[2], 'text'));
+            cityResult2.val(_getParam(items[0], 'text') + " " + _getParam(items[1], 'text') + " " + _getParam(items[2], 'text'));
+            $("input[name=xjProvince]").val(items[0].text)
+            $("input[name=xjCity]").val(items[1].text)
+            $("input[name=xjCounty]").val(items[2].text)
         })
     })
     if (user) {
