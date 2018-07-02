@@ -41,14 +41,16 @@ function showSomeOne(user,index) {
             $(".info-birthDay").html(user.birthDay ? user.birthDay.substr(0,10):'');
             $(".info-memorialId").html(user.memorialId);
             $(".info-phone").html(user.phone);
-            $(".info-survivalMode").html(user.survivalMode=='逝' ? "亡人":user.survivalMode);
+            $(".info-survivalMode").html(user.survivalMode=='逝' ? "亡人":"生者");
             $(".info-address").html(user.address);
             $(".info-addr").html(user.xjProvince +" " +user.xjCity + " " + user.xjCounty);
             if(user.survivalMode == "活"){
                 $(".info-addr-title").html("居住地");
+                $(".info-birthDay").prev().html("生日");
                 $(".info-phone-item").show();
             }else{
                 $(".info-addr-title").html("墓地");
+                $(".info-birthDay").prev().html("冥寿");
                 $(".info-phone-item").hide();
             }
 
@@ -65,14 +67,16 @@ function showSomeOne(user,index) {
             $(".info-birthDay").html(user.spouseBirthDay ? user.spouseBirthDay.substr(0,10):'');
             $(".info-memorialId").html(user.spouseMemorialId);
             $(".info-phone").html(user.spousePhone);
-            $(".info-survivalMode").html(user.spouseSurvivalMode=='逝' ? "亡人":user.spouseSurvivalMode);
+            $(".info-survivalMode").html(user.spouseSurvivalMode=='逝' ? "亡人":"生者");
             $(".info-addr").html(user.spouseXjProvince +" " +user.spouseXjCity + " " + user.spouseXjCounty);
             $(".info-address").html(user.spouseAddress);
             if(user.spouseSurvivalMode == "活"){
                 $(".info-addr-title").html("居住地");
+                $(".info-birthDay").prev().html("生日");
                 $(".info-phone-item").show();
             }else{
                 $(".info-addr-title").html("墓地");
+                $(".info-birthDay").prev().html("冥寿");
                 $(".info-phone-item").hide();
             }
             hideAll();

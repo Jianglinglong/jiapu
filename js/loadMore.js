@@ -19,7 +19,55 @@ function defaultImgUrl(obj) {
 }
 
 function goJiapu(id) {
-    window.location.href = "editship.html?pedigreeId=" + id;
+    jiaPuInfo(id);
+}
+
+//家谱访问处理
+function jiaPuInfo(id) {
+    $.ajax({
+        headers: {
+            tokenInfo: window.localStorage.getItem("tokenInfo")
+        },
+        type: "POST",
+        url: urlBase + "/api/pedigree/checkAccess?pedigreeId=" + id,
+        data: {},
+        dataType: "json",
+        success: function (data) {
+            if (data.code == 'SUCCESS') {
+                if (data.result) {
+                   window.location.href = "editship.html?pedigreeId=" + id;
+                } else {
+                    if (inputPwd = prompt("请输入密码访问")) {
+                        jiapuCheckPwd(inputPwd, id);
+                    }
+                }
+            }
+            else {
+                mui.alert(data.message);
+            }
+        }
+    });
+}
+
+function jiapuCheckPwd(pwd, id) {
+    $.ajax({
+        headers: {
+            tokenInfo: window.localStorage.getItem("tokenInfo"),
+            userId: 0
+        },
+        type: "POST",
+        url: urlBase + "/api/pedigree/accesscheckPassWorld?password=" + pwd + "&pedigreeId=" + id,
+        data: {},
+        dataType: "json",
+        success: function (data) {
+            if (data.code == 'SUCCESS') {
+                window.location.href = "editship.html?pedigreeId=" + id + "&password=" + pwd;
+            }
+            else {
+                mui.alert(data.message);
+            }
+        }
+    });
 }
 
 function loadMore(content) {
