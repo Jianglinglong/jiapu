@@ -181,27 +181,26 @@ function pepoleInfo(id) {
 }
 function deleteInfo(id) {
     $.ajax({
+        type: "POST",
         headers: {
             tokenInfo: window.localStorage.getItem("tokenInfo")
         },
-        type: "POST",
-        url: urlBase + "/api/memorial/checkAccess?memorialId=" + id,
-        data: {},
+
+        url: urlBase + "/api/memorial/delete?memorialId=" + id,
+        contentType: "application/json; charset=utf-8",
+//	                data: JSON.stringify(requestBody),
         dataType: "json",
         success: function (data) {
             if (data.code == 'SUCCESS') {
-                if (data.result) {
-                    window.location.href = "delMemorial.html?memorialId=" + id;
-                } else {
-                    //
-                    mui.alert("请输入密码");
-                }
+                mui.alert("删除成功~~~~~~~");
+                location.reload();
             }
             else {
-                mui.alert(data.message);
+                mui.alert(data.message)
             }
         },
         error: function (message) {
+            mui.alert("提交数据失败！");
         }
     });
 }

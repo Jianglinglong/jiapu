@@ -6,8 +6,8 @@
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title></title>
     <link href="../css/mui.min.css" rel="stylesheet"/>
-    <link href="../css/index.css?version=3.0" rel="stylesheet"/>
-    <link href="../css/changjing.css?version=3.0" rel="stylesheet"/>
+    <link href="../css/index.css?version=3.2" rel="stylesheet"/>
+    <link href="../css/changjing.css?version=3.1" rel="stylesheet"/>
     <script src="../js/jquery-1.10.2.js" type="text/javascript" charset="utf-8"></script>
     <style type="text/css">
         #jibai {
@@ -230,9 +230,7 @@
             <span class="mui-tab-label">留言</span>
         </a>
     </nav>
-    <div class="gifplay" style="text-align: center; z-index: 99;"><img id="gifPlayImg"
-                                                                       style="vertical-align: middle;margin-top: 56%;max-width: 100%;"
-                                                                       src="../img/gif/bp.gif"></div>
+    <div class="gifplay" style="text-align: center; z-index: 99;"><img id="gifPlayImg" style="vertical-align: middle;margin-top: 56%;max-width: 100%;"></div>
     <script>
         $("#jb").on("tap", function () {
             $("#jibai").slideToggle("slow");
@@ -358,8 +356,14 @@
                         address: data.result.address, // 地址详情说明
                         scale: 23, // 地图缩放级别,整形值,范围从1~28。默认为最大
                     };
+
                     $("#location").click(function () {
-                        wx.openLocation(option);
+                        if (option.longitude && option.latitude) {
+                            wx.openLocation(option);
+                        }else {
+                            mui.alert("该纪念馆没有位置信息")
+                        }
+
                     });
                     $(".changeBackground").on("tap", function () {
                         window.location.href = "upgradehouse.html?memorialId=" + memorialId;
