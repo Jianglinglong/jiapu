@@ -68,11 +68,16 @@
         <!--<img id="mubeixiang"  src=""/>-->
         <!--<span id="muzi" >张国荣之墓</span>-->
     </div>
-    <div class="changBuid">
+    <div class="changBuid" style="display: none">
         <div class="changeBackground">更换场景</div>
         <div class="changeAddress">修改地址</div>
     </div>
     <script type="application/javascript">
+        var addressChange= sessionStorage.getItem("addressChange")
+        if (addressChange) {
+            sessionStorage.removeItem("addressChange");
+            location.reload();
+        }
         //单人室内
         //		$(".muxiang").prepend('<img class="lingwei" id="lingwei" src="../img/lingpai1.png"/>');
         //		$(".muxiang").append('<img class="mubeixiang_sn" id="mubeixiang" src="../img/mx.jpg"/>');

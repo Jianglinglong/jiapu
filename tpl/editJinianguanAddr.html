@@ -33,8 +33,10 @@
         }
     }, false);
     var iframeSrc = "http://apis.map.qq.com/tools/locpicker?search=1&type=1&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&referer=myapp";
-    var beforeAddr =GetQueryString("coord");
-    iframeSrc += "&coord=" +beforeAddr;
+    var beforeAddr =GetQueryString("coord").split(",");
+    if (beforeAddr.length==2){
+        iframeSrc += "&coord=" +beforeAddr.join(",");
+    }
 
     $("#mapPage").css("height", $(window).height() - $("nav").height());
     $("#mapPage").attr("src", iframeSrc);
@@ -45,13 +47,14 @@
                 "address": address.poiaddress,
                 "addressName": address.poiname,
                 "latitude": address.latlng.lat,
-                "longitude": address.latlng.Ing,
+                "longitude": address.latlng.lng,
                 "memorialId": GetQueryString("memorialId")
             };
             postDataToServer("/api/memorial/editLocation",JSON.stringify(data),function (res) {
                 console.log(res)
                 if (res.code ==  "SUCCESS") {
                     mui.alert(res.message,function () {
+                        sessionStorage.setItem("addressChange","addressChange");
                         history.back()
                     })
                 }
