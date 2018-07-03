@@ -181,17 +181,20 @@ li {
 	height: 44px;
 }
 .changBuid{
-	float: right;
-	
-	background: #007AFF;
-	color: #FFFFFF;
+	position: fixed;
+	right: 0.5rem;
+	top: 4rem;
+	height: 4rem;
+	background-color: #007AFF;
 	text-align: center;
-	line-height: 44px;
+	line-height: 2rem;
 	border-radius: 6px;
-	margin-top:20px;
-	margin-right: 10px;
 	width: 80px;
-	height: 44px;
+	font-size: smaller;
+}
+.changeBackground,.changeAddress{
+	height: 2rem;
+	color: white;
 }
 .mui-input-row {
 	margin-top: -6px

@@ -33,31 +33,6 @@ $(document).ready(function(){
             var desc = "分享描述";
             var shareImg = "http://img.yunji128.com/homage/upload/sacrifice/2018/06/75ca75abf4864918b70794d2390d43cc.png";
             var link = "http://wx.yunji128.com/tpl/share.html?shareUserId="+shareUserId;
-            var option={
-                infoUrl: '', // 在查看位置界面底部显示的超链接,可点击跳转
-                latitude: 0, // 纬度，浮点数，范围为90 ~ -90
-                longitude: 0, // 经度，浮点数，范围为180 ~ -180。
-                name: '', // 位置名
-                address: '', // 地址详情说明
-                scale: 1, // 地图缩放级别,整形值,范围从1~28。默认为最大
-            };
-            wx.getLocation({
-                type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
-                success: function (res) {
-                    option.latitude = res.latitude ||29.50207;
-                    option.longitude=res.longitude || 106.5114;
-                    option.scale=15;
-                    option.name="重庆";
-                    option.address="九龙坡";
-                    var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
-                    var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
-                    var speed = res.speed; // 速度，以米/每秒计
-                    var accuracy = res.accuracy; // 位置精度
-                }
-            });
-            $("#location").click(function () {
-                wx.openLocation(option);
-            });
             wx.ready(function(){
             	 /*分享给朋友*/  
 		        wx.onMenuShareAppMessage({  
