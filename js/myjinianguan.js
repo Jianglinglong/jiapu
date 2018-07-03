@@ -180,29 +180,33 @@ function pepoleInfo(id) {
     });
 }
 function deleteInfo(id) {
-    $.ajax({
-        type: "POST",
-        headers: {
-            tokenInfo: window.localStorage.getItem("tokenInfo")
-        },
-
-        url: urlBase + "/api/memorial/delete?memorialId=" + id,
-        contentType: "application/json; charset=utf-8",
+    var btnArray = ['是', '否'];
+    mui.confirm('是否删除该纪念馆？', '提示', btnArray, function(e) {
+        if (e.index == 0) {
+            $.ajax({
+                type: "POST",
+                headers: {
+                    tokenInfo: window.localStorage.getItem("tokenInfo")
+                },
+                url: urlBase + "/api/memorial/delete?memorialId=" + id,
+                contentType: "application/json; charset=utf-8",
 //	                data: JSON.stringify(requestBody),
-        dataType: "json",
-        success: function (data) {
-            if (data.code == 'SUCCESS') {
-                mui.alert("删除成功~~~~~~~");
-                location.reload();
-            }
-            else {
-                mui.alert(data.message)
-            }
-        },
-        error: function (message) {
-            mui.alert("提交数据失败！");
+                dataType: "json",
+                success: function (data) {
+                    if (data.code == 'SUCCESS') {
+                        mui.alert("删除成功~~~~~~~");
+                        location.reload();
+                    }
+                    else {
+                        mui.alert(data.message)
+                    }
+                },
+                error: function (message) {
+                    mui.alert("提交数据失败！");
+                }
+            });
         }
-    });
+    })
 }
 function muxiangInfo(id) {
     $.ajax({
