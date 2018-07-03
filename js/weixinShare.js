@@ -44,11 +44,11 @@ $(document).ready(function(){
             wx.getLocation({
                 type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
                 success: function (res) {
-                    option.latitude = res.latitude;
-                    option.longitude=res.longitude;
+                    option.latitude = res.latitude ||29.50207;
+                    option.longitude=res.longitude || 106.5114;
                     option.scale=15;
                     option.name="重庆";
-                    option.address="九龙坡玖城壹号";
+                    option.address="九龙坡";
                     var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
                     var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
                     var speed = res.speed; // 速度，以米/每秒计
@@ -56,7 +56,6 @@ $(document).ready(function(){
                 }
             });
             $("#location").click(function () {
-                console.log(this)
                 wx.openLocation(option);
             });
             wx.ready(function(){
