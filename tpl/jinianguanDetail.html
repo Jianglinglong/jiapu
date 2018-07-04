@@ -9,6 +9,7 @@
     <link href="../css/index.css?version=3.2" rel="stylesheet"/>
     <link href="../css/changjing.css?version=3.1" rel="stylesheet"/>
     <script src="../js/jquery-1.10.2.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../js/reloadpage.js" type="text/javascript" charset="utf-8"></script>
     <style type="text/css">
         #jibai {
             display: none;
@@ -73,11 +74,7 @@
         <div class="changeAddress">修改地址</div>
     </div>
     <script type="application/javascript">
-        var addressChange= sessionStorage.getItem("addressChange")
-        if (addressChange) {
-            sessionStorage.removeItem("addressChange");
-            location.reload();
-        }
+        reloadPageCondition("addressChange")
         //单人室内
         //		$(".muxiang").prepend('<img class="lingwei" id="lingwei" src="../img/lingpai1.png"/>');
         //		$(".muxiang").append('<img class="mubeixiang_sn" id="mubeixiang" src="../img/mx.jpg"/>');
@@ -230,7 +227,7 @@
             <span class="mui-tab-label">留言</span>
         </a>
     </nav>
-    <div class="gifplay" style="text-align: center; z-index: 99;"><img id="gifPlayImg" style="vertical-align: middle;margin-top: 56%;max-width: 100%;"></div>
+    <div class="gifplay" style="z-index: 999999;position: relative;"><img id="gifPlayImg" style="max-width: 100px;position: fixed;bottom: 20%;"></div>
     <script>
         $("#jb").on("tap", function () {
             $("#jibai").slideToggle("slow");
@@ -312,8 +309,7 @@
         } else {
             $(".gifplay").slideDown("slow");
 
-            $("#gifPlayImg").attr("src", gifUrl);
-
+            $("#gifPlayImg").attr("src", gifUrl).css("left",($(window).width()-100)/2 +'px');
             //n秒后关闭
             setTimeout(function () {
 

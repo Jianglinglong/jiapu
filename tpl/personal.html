@@ -7,7 +7,7 @@
     <title>个人中心</title>
     <script src="../js/mui.min.js"></script>
     <link href="../css/mui.min.css" rel="stylesheet"/>
-    <link href="../css/index.css?version=2.3" rel="stylesheet"/>
+    <link href="../css/index.css?version=3.4" rel="stylesheet"/>
     <script src="../js/jquery-1.10.2.js"></script>
     <script src="../js/showmessage.js"></script>
 
@@ -21,10 +21,8 @@
         }
 
         .PleaseLogin {
-            /*border: 1px red solid;*/
-            width: 100px;
-            height: 40px;
-            margin: 0 auto;
+            padding: 11px 15px;
+            text-align: center;
         }
 
         .mybanner {
@@ -66,6 +64,8 @@
             margin-left: 0px;
 
         }
+        .mui-table-view-cell{height: 60px;line-height: 38px;color: #808080;}
+        .mui-navigate-right:after, .mui-push-right:after{color: black}
     </style>
     <script src="../js/weixinShare.js" type="text/javascript" charset="utf-8"></script>
 </head>
@@ -102,14 +102,34 @@
         <a type="button" href="../index.html?biz=login" class="mui-btn mui-btn-primary mui-btn-outlined payyb">去登陆</a>
     </div>
 
-    <div id="albumPhone" class="phone"><a href="#">相册管理</a><span class="mui-icon mui-icon-forward phoneic"></span></div>
+    <ul class="mui-table-view">
+        <li id="albumPhone" class="mui-table-view-cell">
+            <a class="mui-navigate-right">相册管理</a>
+        </li>
+        <li id="myjlg" class="mui-table-view-cell">
+            <a class="mui-navigate-right">我的纪念馆</a>
+        </li>
+        <li  id="myjiapu" class="mui-table-view-cell">
+            <a class="mui-navigate-right">我的家谱</a>
+        </li>
+        <li id="myfriend"  class="mui-table-view-cell">
+            <a class="mui-navigate-right">我的亲友</a>
+        </li>
+        <li  id="verify" class="mui-table-view-cell">
+            <a class="mui-navigate-right">好友验证</a>
+        </li>
+        <li id="set1" class="mui-table-view-cell">
+            <a class="mui-navigate-right">设置</a>
+        </li>
+    </ul>
+    <!--<div id="albumPhone" class="phone"><a href="#">相册管理</a><span class="mui-icon mui-icon-forward phoneic"></span></div>-->
 
-    <div id="myjlg" class="phone"><a href="#">我的纪念馆</a><span class="mui-icon mui-icon-forward phoneic"></span></div>
+    <!--<div id="myjlg" class="phone"><a href="#">我的纪念馆</a><span class="mui-icon mui-icon-forward phoneic"></span></div>-->
 
-    <div id="myjiapu" class="phone"><a href="#">我的家谱</a><span class="mui-icon mui-icon-forward phoneic"></span></div>
-    <div id="myfriend" class="phone"><a href="#">我的亲友</a><span class="mui-icon mui-icon-forward phoneic"></span></div>
- 	<div id="verify" class="phone"><a href="#">好友验证</a><span class="mui-icon mui-icon-forward phoneic"></span></div>
-    <div id="set1" class="phone"><a href="#">设置</a><span class="mui-icon mui-icon-forward phoneic"></span></div>
+    <!--<div id="myjiapu" class="phone"><a href="#">我的家谱</a><span class="mui-icon mui-icon-forward phoneic"></span></div>-->
+    <!--<div id="myfriend" class="phone"><a href="#">我的亲友</a><span class="mui-icon mui-icon-forward phoneic"></span></div>-->
+ 	<!--<div id="verify" class="phone"><a href="#">好友验证</a><span class="mui-icon mui-icon-forward phoneic"></span></div>-->
+    <!--<div id="set1" class="phone"><a href="#">设置</a><span class="mui-icon mui-icon-forward phoneic"></span></div>-->
 
 </div>
 
