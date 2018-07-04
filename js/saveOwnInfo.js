@@ -6,12 +6,6 @@ $(function () {
     }
     if (user) {
         user = JSON.parse(user);
-        if(user.birthDay){
-            user.birthDay = user.birthDay.substr(0,10);
-        }
-        if (user.spouseBirthDay){
-            user.spouseBirthDay = user.spouseBirthDay.substr(0,10);
-        }
         for (var item in user) {
             var input = $("input[name=" + item + "]")
             var type = input.attr("type");
@@ -36,8 +30,9 @@ $(function () {
         console.log(info)
         postDataToServer("/api/pedigree/myPedigreeUserInfoSave", JSON.stringify(info), function (res) {
             if (res.code == "SUCCESS") {
-                mui.alert("保存成功")
-                history.back();
+                mui.alert("保存成功",function () {
+                    history.back();
+                });
             } else {
                 mui.alert(res.message)
             }
@@ -82,31 +77,6 @@ $(function () {
     upload($("#img"), $("#file"), $("#headImg"));
     upload($("#another"), $("#aFile"), $("#aHeadImg"));
     var btns = $(".birth");
-    var dtpicker = new mui.DtPicker({
-        type: "date", //设置日历初始视图模式
-        beginDate: new Date(1900, 0, 1), //设置开始日期
-        endDate: new Date(2050, 12, 31), //设置结束日期
-    })
-    if ($("input[name=birthDay]").val().length > 0) {
-        dtpicker.setSelectedValue($("input[name=birthDay]").val())
-    }
-    btns[0].addEventListener('tap', function () {
-        dtpicker.show(function (e) {
-            console.log(e);
-            $(btns[0]).val(e.text)
-        })
-    });
-    var dtpicke2 = new mui.DtPicker({
-        type: "date", //设置日历初始视图模式
-        beginDate: new Date(1900, 0, 1), //设置开始日期
-        endDate: new Date(2050, 11, 31), //设置结束日期
-    });
-    btns[1].addEventListener('tap', function () {
-        dtpicke2.show(function (e) {
-            console.log(e);
-            $(btns[1]).val(e.text)
-        })
-    });
     var _getParam = function (obj, param) {
         return obj[param] || '';
     };

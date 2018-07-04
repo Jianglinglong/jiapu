@@ -6,8 +6,8 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <link href="../css/mui.min.css" rel="stylesheet"/>
-    <link href="../css/index.css?version=3.2" rel="stylesheet"/>
-    <link href="../css/buiding.css?version=3.2" rel="stylesheet"/>
+    <link href="../css/index.css?version=3.4" rel="stylesheet"/>
+    <link href="../css/buiding.css?version=3.4" rel="stylesheet"/>
     <script src="../js/jquery-1.10.2.js"></script>
     <script src="../js/weixinShare.js" type="text/javascript" charset="utf-8"></script>
 </head>
@@ -70,7 +70,7 @@
             </div>
         </div>
     </div>
-    <div id="quanxian">
+    <div id="quanxian" style="height: 50px;padding: 11px 15px;">
         <h5 class="mui-content-padded">进入权限：</h5>
         <div id="chousejoinType" class="mui-switch mui-switch-blue mui-switch-mini switchdiv mui-active">
             <div class="mui-switch-handle"></div>
@@ -102,43 +102,6 @@
     }
 
     var memorialId = GetQueryString("memorialId");
-    $.ajax({
-        headers: {
-            tokenInfo: window.localStorage.getItem("tokenInfo")
-        },
-        type: "GET",
-        contentType: "application/json",
-        dataType: "json",
-        url: urlBase + "/api/memorial/basicInfo?memorialId=" + memorialId,
-        success: function (data) {
-            if (data.code == 'SUCCESS') {
-                var memorialModelId = data.result.memorialModelId;
-                $("#abc_" + memorialModelId).addClass("checkedImg")
-                $("#memorialModelId").val(memorialModelId);
-                $("#memorialName").val(data.result.memorialName);
-                var joinType = data.result.joinType;
-                if (joinType == 'password') {
-                    $("#joinType").val("password");
-                    $('#password').show();
-                    $('#password').val('');
-                }
-                if (joinType == 'direct') {
-                    $("#joinType").val("direct");
-                    $('#password').hide();
-                    $('#password').val('');
-                    $("#chousejoinType").removeClass("mui-active");
-                    isManual = false;
-                }
-            }
-            else {
-                mui.alert(data.message);
-            }
-        },
-        error: function (message) {
-            mui.alert("读取姓氏列表失败");
-        }
-    });
-
     $(function () {
         //对按钮进行监听
         document.getElementById("chousejoinType").addEventListener('toggle', function (event) {
@@ -168,6 +131,44 @@
                     + '<a href="javascript:chouseModel(' + this.memorialModelId + ');" ><img class="mui-media-object" src="' + imgBase + this.thumImg + '"><div class="mui-media-body">' + this.modelName + '</div></a></li>'
             });
             document.getElementById('modelChose').innerHTML = contens;
+            $.ajax({
+                headers: {
+                    tokenInfo: window.localStorage.getItem("tokenInfo")
+                },
+                type: "GET",
+                contentType: "application/json",
+                dataType: "json",
+                url: urlBase + "/api/memorial/basicInfo?memorialId=" + memorialId,
+                success: function (data) {
+                    if (data.code == 'SUCCESS') {
+                        setTimeout(function () {
+                            var memorialModelId = data.result.memorialModelId;
+                            $("#abc_" + memorialModelId).addClass("checkedImg");
+                            $("#memorialModelId").val(memorialModelId);
+                            $("#memorialName").val(data.result.memorialName);
+                            var joinType = data.result.joinType;
+                            if (joinType == 'password') {
+                                $("#joinType").val("password");
+                                $('#password').css("visibility", "visible");
+                                $('#password').val('');
+                            }
+                            if (joinType == 'direct') {
+                                $("#joinType").val("direct");
+                                $('#password').css("visibility", "hidden");
+                                $('#password').val('');
+                                $("#chousejoinType").removeClass("mui-active");
+                                isManual = false;
+                            }
+                        },1000);
+                    }
+                    else {
+                        mui.alert(data.message);
+                    }
+                },
+                error: function (message) {
+                    mui.alert("读取姓氏列表失败");
+                }
+            });
         },
         error: function (message) {
             mui.alert("读取姓氏列表失败");

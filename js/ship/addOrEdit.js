@@ -38,7 +38,7 @@ function showSomeOne(user,index) {
             $(".info-headImg").attr("src",imgBase+ user.headImg + '_crop_172x172');
             $(".info-name").html(user.name);
             $(".info-sex").html(user.sex);
-            $(".info-birthDay").html(user.birthDay ? user.birthDay.substr(0,10):'');
+            $(".info-birthDay").html(user.birthDay);
             $(".info-memorialId").html(user.memorialId);
             $(".info-phone").html(user.phone);
             $(".info-survivalMode").html(user.survivalMode=='逝' ? "亡人":"生者");
@@ -64,7 +64,7 @@ function showSomeOne(user,index) {
             $(".info-headImg").attr("src",imgBase+ user.spouseHeadImg + '_crop_172x172');
             $(".info-name").html(user.spouseName);
             $(".info-sex").html(user.sex=="男"?"女":"男");
-            $(".info-birthDay").html(user.spouseBirthDay ? user.spouseBirthDay.substr(0,10):'');
+            $(".info-birthDay").html(user.spouseBirthDay);
             $(".info-memorialId").html(user.spouseMemorialId);
             $(".info-phone").html(user.spousePhone);
             $(".info-survivalMode").html(user.spouseSurvivalMode=='逝' ? "亡人":"生者");
@@ -126,7 +126,7 @@ function initUserInfo(user) {
         var type = input.attr("type");
         if (type == "text") {
             if (item == 'birthDay' || item == 'spouseBirthDay') {
-                $("input[name=" + item + "]").val(user[item]?user[item].substr(0,10):'');
+                $("input[name=" + item + "]").val(user[item]);
             }else {
                 $("input[name=" + item + "]").val(user[item]);
             }
@@ -154,32 +154,6 @@ function initUserInfo(user) {
 function initEditBox(user) {
     upload($("#img"), $("#file"), $("#headImg"));
     upload($("#another"), $("#aFile"), $("#aHeadImg"));
-    var btns = $(".birth");
-    dtpicker = new mui.DtPicker({
-        type: "date", //设置日历初始视图模式
-        beginDate: new Date(1900, 0, 1), //设置开始日期
-        endDate: new Date(2050, 11, 31), //设置结束日期
-    })
-    if ($("input[name=birthDay]").val().length > 0) {
-        dtpicker.setSelectedValue($("input[name=birthDay]").val())
-    }
-    btns[0].addEventListener('tap', function () {
-        dtpicker.show(function (e) {
-            console.log(e);
-            $(btns[0]).val(e.text)
-        })
-    });
-    dtpicker2 = new mui.DtPicker({
-        type: "date", //设置日历初始视图模式
-        beginDate: new Date(1900, 0, 1), //设置开始日期
-        endDate: new Date(2050, 11, 31), //设置结束日期
-    });
-    btns[1].addEventListener('tap', function () {
-        dtpicker2.show(function (e) {
-            console.log(e);
-            $(btns[1]).val(e.text)
-        })
-    });
     var _getParam = function (obj, param) {
         return obj[param] || '';
     };
@@ -213,8 +187,6 @@ function initEditBox(user) {
     })
 
     if (user) {
-        dtpicker.setSelectedValue($("#myBirth").val())
-        dtpicker2.setSelectedValue($("#aBirth").val())
         cityPicker2.pickers[0].setSelectedValue(user.xjProvince);
         setTimeout(function () {
             cityPicker2.pickers[1].setSelectedValue(user.xjCity);
@@ -346,9 +318,10 @@ function submitBtnClick(api, parent, own, type,direct) {
         info.pedigreeId = pedigreeId;
         postDataToServer(api, JSON.stringify(info), function (res) {
             if (res.code == "SUCCESS") {
-                mui.alert("保存成功");
+                mui.alert("保存成功",function () {
+                    history.back();
+                });
                 sessionStorage.setItem("reload","reload")
-                history.back();
             } else if(res.code == "PleaseLogin") {
                 location.href = "login.html"
             }else {

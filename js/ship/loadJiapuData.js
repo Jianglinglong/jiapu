@@ -95,6 +95,23 @@ $(function () {
         success:function (res) {
             belong = user.userId ==  res.result.userId;
             loadBelong = true;
+            if(res.code=='SUCCESS'){
+                for (var item in res.result){
+                    $("."+item).val(res.result[item]);
+                }
+                if (res.result.flagPwd){
+                    $(".flagPwd").addClass("mui-active");
+                }
+                $(".addr").val(res.result.province + " "+res.result.city + " " +res.result.county);
+                $("#jiapu-tt-img").attr("src",imgBase+ res.result.totem);
+                $("#ship input").attr("readonly","readonly");
+                $("#textarea").html(res.result.ancestralHall)
+                if (user.userId !=res.result.userId){
+                    $("#editShip").remove();
+                }
+                $("#download").attr("rel",res.result.musicBook);
+                initShowBigImg()
+            }
         },
         async:false
     });
@@ -114,31 +131,6 @@ $(function () {
             clearInterval(count);
         }
     });
-
-    ajax({
-        url:"/api/pedigree/info",
-        params:{pedigreeId:pedigreeId},
-        method:"get",
-        success:function (res) {
-            if(res.code=='SUCCESS'){
-                for (var item in res.result){
-                    $("."+item).val(res.result[item]);
-                }
-                if (res.result.flagPwd){
-                    $(".flagPwd").addClass("mui-active");
-                }
-                $(".addr").val(res.result.province + " "+res.result.city + " " +res.result.county);
-                $("#jiapu-tt-img").attr("src",imgBase+ res.result.totem);
-                $("#ship input").attr("readonly","readonly");
-                $("#textarea").html(res.result.ancestralHall)
-                if (user.userId !=res.result.userId){
-                    $("#editShip").remove();
-                }
-                $("#download").attr("rel",res.result.musicBook);
-                initShowBigImg()
-            }
-        }
-    })
 });
 
 var loadBelong =false;
