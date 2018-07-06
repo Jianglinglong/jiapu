@@ -549,7 +549,7 @@ kyoPopupMenu = (function(){
         sys: function (obj) {
             $('.popup_menu').remove();
             popupMenuApp =
-                $('<div class="popup_menu app-menu"><ul><li><a menu="menu1">人物视觉</a></li><li><a menu="menu2">个人信息</a></li><li><a menu="menu3">纪念馆</a></li></ul></div>').
+                $('<div class="popup_menu app-menu"><ul><li><a menu="menu1">进入家谱</a></li><li><a menu="menu2">个人信息</a></li><li><a menu="menu3">纪念馆</a></li></ul></div>').
                 find('a').attr('href','javascript:;').end().appendTo('.position-relative');
             //绑定事件
             $('.app-menu a[menu="menu1"]').on('click', function (){
@@ -557,7 +557,8 @@ kyoPopupMenu = (function(){
                 if (phone) {
                     getDataFromServer("/api/pedigreePerson/people_perspective",{phone:phone},function (res) {
                         if (res.result){
-                            location.href = "editship.html?pedigreeId="+res.result;
+                            jiaPuInfo(res.result)
+                            // location.href = "editship.html?pedigreeId="+res.result;
                         }else {
                             mui.alert(kyoPopupMenu.name +"还没有创建人物视角");
                         }
@@ -589,3 +590,51 @@ $('.show-canvas-content').on('click', function (){return false;}).click(function
     kyoPopupMenu.id=null;
     $('.popup_menu').hide();
 });
+
+//家谱访问处理
+function jiaPuInfo(id) {
+    $.ajax({
+        headers: {
+            tokenInfo: window.localStorage.getItem("tokenInfo")
+        },
+        type: "POST",
+        url: urlBase + "/api/pedigree/checkAccess?pedigreeId=" + id,
+        data: {},
+        dataType: "json",
+        success: function (data) {
+            if (data.code == 'SUCCESS') {
+                if (data.result) {
+                    window.location.href = "editship.html?pedigreeId=" + id;
+                } else {
+                    if (inputPwd = prompt("请输入密码访问")) {
+                        jiapuCheckPwd(inputPwd, id);
+                    }
+                }
+            }
+            else {
+                mui.alert(data.message);
+            }
+        }
+    });
+}
+
+function jiapuCheckPwd(pwd, id) {
+    $.ajax({
+        headers: {
+            tokenInfo: window.localStorage.getItem("tokenInfo"),
+            userId: 0
+        },
+        type: "POST",
+        url: urlBase + "/api/pedigree/accesscheckPassWorld?password=" + pwd + "&pedigreeId=" + id,
+        data: {},
+        dataType: "json",
+        success: function (data) {
+            if (data.code == 'SUCCESS') {
+                window.location.href = "editship.html?pedigreeId=" + id + "&password=" + pwd;
+            }
+            else {
+                mui.alert(data.message);
+            }
+        }
+    });
+}
