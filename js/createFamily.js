@@ -50,7 +50,7 @@ $(function () {
                 },
                 success: function (data) {
                     if (data.code == 'SUCCESS') {
-                        $("#musicBook").val( imgBase + data.result.path);
+                        $(".musicBook").val( imgBase + data.result.path);
                         $(".musicBookText").val("已上传");
                         mui.alert("上传成功");
                         file.val('');
