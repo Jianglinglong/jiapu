@@ -35,10 +35,11 @@ $(function () {
         var file  = $("form[name=musicBook]").children("input[type=file]");
         file.click();
         file.unbind();
-        file.change(function () {
+        file.on("change",function () {
             var fileSize = $(this)[0].files[0].size;
-            var data = new FormData($(this).parent()[0]);
-            data.set("fileSize", fileSize);
+            var data = new FormData(document.getElementById("musicBookForm"));
+            data.append("fileSize", fileSize);
+            alert(2)
             $.ajax({
                 type: "POST",
                 url: urlBase + "/file/fileUpload",
@@ -70,7 +71,7 @@ $(function () {
             var fileSize = $(this)[0].files[0].size;
             console.log(fileSize)
             var jiapuImg = new FormData(form[0]);
-            jiapuImg.set("fileSize", fileSize);
+            jiapuImg.append("fileSize", fileSize);
             $.ajax({
                 type: "POST",
                 url: urlBase + "/file/fileUpload",
@@ -169,7 +170,7 @@ var accessPwd = true;
     $("#jiapu-tt-citang").change(function () {
         var fileSize = $(this)[0].files[0].size;
         var data = new FormData($(this).parent()[0]);
-        data.set("fileSize", fileSize);
+        data.append("fileSize", fileSize);
         $.ajax({
             type: "POST",
             url: urlBase + "/file/fileUpload",
